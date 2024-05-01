@@ -37,7 +37,7 @@ function Details() {
                     {/* {pets.petID && <img src={pets.petPfpUrl} />} */}
                         <div class="text">
                             <h2>{goodsInfo.goodsName}</h2>
-                            <div>{goodsInfo.details}</div>
+                            <div>{goodsInfo.properties}</div>
                             <table>
                                 <tr>
                                     <th>เวลาที่เหลือ</th>
