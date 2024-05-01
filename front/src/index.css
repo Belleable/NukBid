@@ -1,0 +1,94 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.pfp {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  position: absolute;
+  right: 20px;
+  top: 16px;
+}
+
+nav {
+  margin: 0;
+  width: 100%;
+  position: fixed;
+  background: linear-gradient(90deg, #D3ECCD 0%, #C8B7DC 100%);
+  padding: 1rem;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  height: 70px;
+}
+
+nav ul {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+}
+
+nav a {
+  text-decoration: none;
+}
+
+nav li {
+  margin: 0 2.5rem;
+  margin-top: 1rem;
+}
+
+.search-box {
+  height: 40px;
+  background: #fff;
+  line-height: 20px;
+  border-radius: 40px;
+  position: absolute;
+  right: 120px;
+}
+
+.search-input {
+  background: #fff;
+  color: #5a5246;
+  outline: none;
+  border: none;
+  line-height: 20px;
+  margin: 10px;
+  width: 300px;
+  float: left;
+  font-size: 16px;
+  font-family: sans-serif;
+}
+
+.search-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  background: #C8B7DC;
+  padding: 5px;
+  border-radius: 50%;
+  float: right;
+  color: #fff;
+  margin: 6.5px;
+  border-color: #ab8ecb;
+}
+
+.Login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Login form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-btn {
+  display: inline;
+}
