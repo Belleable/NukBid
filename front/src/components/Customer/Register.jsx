@@ -32,7 +32,7 @@ function Register() {
         try {
 
             // Send the registration data to your server
-            const response = await axios.post('http://localhost:3009/register', formData)
+            const response = await axios.post('http://localhost:3380/register', formData)
 
             // Handle the response accordingly
             if(response.data.status === "error"){
@@ -138,7 +138,7 @@ function Register() {
                         <input 
                         type="text" 
                         placeholder="ที่อยู่สำหรับจัดส่ง" 
-                        name="conf_pw"
+                        name="address"
                         value={formData.conf_pw}
                         onChange={handleChange} 
                         required/>
