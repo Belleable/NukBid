@@ -5,8 +5,10 @@ import bcrypt from "bcrypt";
 export const signup = async (req, res) => {
       const { username, password, fname, lname, email, tel, address } = req.body;
       if (!username || !password || !fname || !lname || !email || !tel || !address ) {
-            res.json({text: "Please enter all your information"})
+            res.json({success: false, text: "Please enter all your information"})
       }
+
+      console.log("From backend " + req.body )
 
       //const findUsers = await Users.find({$or: [{username: "owachiii"}, {email: "samon"}]});
       const findUser = await Users.findOne({ $or: [ {email: email}, {username: username} ] });

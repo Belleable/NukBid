@@ -34,14 +34,14 @@ function Home() {
     }, []);*/
     
 
-    console.log(goods)
+    //console.log(goods)
     return (
         <>
         
-        {goods.map((good) => {
-                <Card goodsName={good.goodsName} goodsID={good.goodsID}/>
-                console.log(good.goodsName)
-        })}
+            
+                    <Card goods={goods} />
+
+            
             
         </>
     );

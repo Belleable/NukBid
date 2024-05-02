@@ -1,13 +1,12 @@
 
 
-function Card({goodsName, goodsID}) {
-    console.log("from card:  " + goodsName)
+function Card({goods}) {
     return (
-        
-        
-            <h3>{goodsName} and {goodsID}</h3>
-            
-        
+        <>
+            {goods.map((good, goodindex) => (
+                <h1 key={goodindex}> {good.goodsID} </h1>
+            ))}
+        </>
     )
 }
 
