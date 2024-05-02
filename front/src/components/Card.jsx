@@ -1,10 +1,10 @@
 
 
-function Card({goods}) {
+function Card({goods, deletable = false}) {
     return (
         <>
             {goods.map((good, goodindex) => (
-                <h1 key={goodindex}> {good.goodsID} </h1>
+                <h1 key={goodindex}> {good._id} </h1>
             ))}
         </>
     )

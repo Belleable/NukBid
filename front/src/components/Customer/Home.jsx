@@ -9,20 +9,18 @@ function Home() {
     const navigate = useNavigate();
 
     const [auth, setAuth] = useState(false);
-    const [goods, setGoods] = useState([{goodsID: 1, goodsName: 'hello'}]);
+    const [goods, setGoods] = useState([]);
 
-    //axios.defaults.withCredentials = true;
+    axios.defaults.withCredentials = true;
 
 
-    /*useEffect(()=>{
+    useEffect(()=>{
         
         const fetch = async () => {
             try {
                 const res = await axios.get('http://localhost:3380/user/home')
                 if (res.data.success === true) {
-                    console.log(res.data)
-
-                    setGoods(res.data)
+                    setGoods(res.data.data)
                 } else {
                     setAuth(false)
                 }
@@ -31,10 +29,10 @@ function Home() {
             }
         }
         fetch()
-    }, []);*/
+    }, []);
     
 
-    //console.log(goods)
+    console.log(goods)
     return (
         <>
         
