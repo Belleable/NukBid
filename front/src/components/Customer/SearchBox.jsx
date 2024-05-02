@@ -41,13 +41,13 @@ function SearchBox() {
     
     return (
         <>
-            <form class="search-box" onSubmit={handleSubmit}>
+            <form className="search-box" onSubmit={handleSubmit}>
                 <input type="text" 
                 placeholder="ค้นหาสินค้าได้ที่นี่"
                 name="keyword" 
                 value={keyword}
                 onChange={handleChange}
-                class="search-input"
+                className="search-input"
                 required />
                 <button className='search-btn' type='submit'>
                     <FontAwesomeIcon icon={faSearch} />

@@ -1,16 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Link, useNavigate } from "react-router-dom";
 
-function Card(product) {
+
+function Card({goods, deletable = false}) {
     return (
-        <div className="Card">
-            {pets.map(product=>(
-                <Link to={`/details/${product.goodsID}`} style={{ textDecoration: 'none' }} className='product' key={product.goodsID}>
-                    {product.goodsID && <h3>{product.goodsName}</h3>}
-                </Link>
+        <>
+            {goods.map((good, goodindex) => (
+                <h1 key={goodindex}> {good._id} </h1>
             ))}
-        </div>
+        </>
     )
 }
 

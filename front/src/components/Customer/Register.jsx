@@ -10,8 +10,8 @@ function Register() {
         lname: '',
         username: '',
         email: '',
-        phone: '',
-        pw: '',
+        tel: '',
+        password: '',
         conf_pw: '',
         address: '',
     });
@@ -24,7 +24,7 @@ function Register() {
         e.preventDefault();
 
         // Check if passwords match
-        if (formData.pw !== formData.conf_pw) {
+        if (formData.password !== formData.conf_pw) {
             alert('Password and confirm password do not match. Please try again.');
             return;
         }
@@ -32,14 +32,14 @@ function Register() {
         try {
 
             // Send the registration data to your server
-            const response = await axios.post('http://localhost:3009/register', formData)
+            const response = await axios.post('http://localhost:3380/register', formData)
 
             // Handle the response accordingly
-            if(response.data.status === "error"){
-                alert(response.data.error)
+            if(response.data.success === false){
+                alert(response.data.text)
             }
             else{
-                alert(response.data.success)
+                alert(response.data.text)
                 navigate('/login')
             }
             
@@ -111,8 +111,8 @@ function Register() {
                         <input 
                         type="text" 
                         placeholder="เบอร์โทรศัพท์" 
-                        name="phone" 
-                        value={formData.phone}
+                        name="tel" 
+                        value={formData.tel}
                         onChange={handleChange}
                         required/>
                     </label>
@@ -120,8 +120,8 @@ function Register() {
                         <input 
                         type="password" 
                         placeholder="รหัสผ่าน" 
-                        name="pw" 
-                        value={formData.pw}
+                        name="password" 
+                        value={formData.password}
                         onChange={handleChange}
                         required/>
                     </label>
@@ -138,8 +138,8 @@ function Register() {
                         <input 
                         type="text" 
                         placeholder="ที่อยู่สำหรับจัดส่ง" 
-                        name="conf_pw"
-                        value={formData.conf_pw}
+                        name="address"
+                        value={formData.address}
                         onChange={handleChange} 
                         required/>
                     </label>

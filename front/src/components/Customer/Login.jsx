@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import axios from 'axios';
-import Cookies from 'universal-cookie';
+//import Cookies from 'universal-cookie';
 
 function Login() {
 const navigate = useNavigate()
     const [formData, setFormData] = useState({
         username: '',
-        pw: '',
+        password: '',
     });
 
     axios.defaults.withCredentials = true;
@@ -20,11 +20,11 @@ const navigate = useNavigate()
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:3009/login', {
+            const response = await axios.post('http://localhost:3380/login', {
                 username: formData.username,
-                pw: formData.pw,
+                password: formData.password,
             });
-            if (response.data.status === "success") {
+            if (response.data.success = true) {
                 alert(response.data.success);
                 navigate('/home');
             }
@@ -36,7 +36,7 @@ const navigate = useNavigate()
             console.error('Authentication error:', error);
             alert('Authentication failed. Please try again.');
         }
-        setFormData({ username: '', pw: '' });
+        setFormData({ username: '', password: '' });
     };
     return (
         <div className="Login">
@@ -57,7 +57,7 @@ const navigate = useNavigate()
                     type="password" 
                     required="" 
                     id="pw" 
-                    name="pw" 
+                    name="password" 
                     value={formData.pw}
                     onChange={handleChange} />
                 </label>

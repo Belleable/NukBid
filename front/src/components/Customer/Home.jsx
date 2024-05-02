@@ -16,32 +16,31 @@ function Home() {
 
     useEffect(()=>{
         
-        axios.get('http://localhost:3009/').then(res => {
-            if (res.data.status === "success") {
-                setAuth(true)
-                navigate('/login')
-            } else {
-                setAuth(false)
-            }
-        })
-
-        const fetchAllPets = async ()=>{
-            try{
-                const res = await axios.get("http://localhost:3009/home");
-                setGoods(res.data);
-            }catch(err){
-                console.log(err);
+        const fetch = async () => {
+            try {
+                const res = await axios.get('http://localhost:3380/user/home')
+                if (res.data.success === true) {
+                    setGoods(res.data.data)
+                } else {
+                    setAuth(false)
+                }
+            } catch (error) {
+                console.log(error.text)
             }
         }
-        fetchAllPets();
+        fetch()
     }, []);
     
 
     console.log(goods)
     return (
         <>
-        <Nav />
-        <Card product = {goods}/>
+        
+            
+                    <Card goods={goods} />
+
+            
+            
         </>
     );
 }

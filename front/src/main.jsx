@@ -13,7 +13,7 @@ import Register from './components/Customer/Register.jsx';
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/user/home",
     element:  <Home />
   },
   {
