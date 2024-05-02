@@ -9,39 +9,40 @@ function Home() {
     const navigate = useNavigate();
 
     const [auth, setAuth] = useState(false);
-    const [goods, setGoods] = useState([]);
+    const [goods, setGoods] = useState([{goodsID: 1, goodsName: 'hello'}]);
 
-    axios.defaults.withCredentials = true;
+    //axios.defaults.withCredentials = true;
 
 
-    useEffect(()=>{
+    /*useEffect(()=>{
         
-        axios.get('http://localhost:3009/').then(res => {
-            if (res.data.status === "success") {
-                setAuth(true)
-                navigate('/login')
-            } else {
-                setAuth(false)
-            }
-        })
+        const fetch = async () => {
+            try {
+                const res = await axios.get('http://localhost:3380/user/home')
+                if (res.data.success === true) {
+                    console.log(res.data)
 
-        const fetchAllPets = async ()=>{
-            try{
-                const res = await axios.get("http://localhost:3009/home");
-                setGoods(res.data);
-            }catch(err){
-                console.log(err);
+                    setGoods(res.data)
+                } else {
+                    setAuth(false)
+                }
+            } catch (error) {
+                console.log(error.text)
             }
         }
-        fetchAllPets();
-    }, []);
+        fetch()
+    }, []);*/
     
 
-    console.log(goods)
+    //console.log(goods)
     return (
         <>
-        <Nav />
-        <Card product = {goods}/>
+        
+            
+                    <Card goods={goods} />
+
+            
+            
         </>
     );
 }
