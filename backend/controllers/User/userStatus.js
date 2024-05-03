@@ -82,7 +82,7 @@ export const userWin = async (req, res) => {
                   { 
                       $match: { 
                           topBuyer: objectId, 
-                          status: "end"
+                          status: "bidding"
                       }
                   },
                   {
@@ -128,11 +128,10 @@ export const userWin = async (req, res) => {
               
                           
     
-            res.json({ data: goods_bidwin });
+            res.json({success: true, data: goods_bidwin });
       } catch (error) {
             res.status(500).json({ message: "", error: error.message });
       }
-
       //res.json({data: goods_bidwin});
 }
 
