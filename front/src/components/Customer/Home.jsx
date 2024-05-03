@@ -13,7 +13,6 @@ function Home() {
 
     axios.defaults.withCredentials = true;
 
-
     useEffect(()=>{
         
         const fetch = async () => {
@@ -35,12 +34,7 @@ function Home() {
     console.log(goods)
     return (
         <>
-        
-            
-                    <Card goods={goods} />
-
-            
-            
+            <Card goods={goods} />
         </>
     );
 }

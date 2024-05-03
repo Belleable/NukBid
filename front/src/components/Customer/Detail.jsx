@@ -15,7 +15,7 @@ function Details() {
     useEffect(() => {
         const fetchGoodsInfo = async () => {
             try {
-                const response = await axios.get(`http://localhost:3009/petprofile/${goodsID}`);
+                const response = await axios.get(`http://localhost:3380/detail/${goodsID}`);
                 
                 setGoodsInfo(response.data[0]);
             } catch (error) {

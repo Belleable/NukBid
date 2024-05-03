@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Nav from './Nav';
 import { Helmet } from 'react-helmet';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
