@@ -1,9 +1,26 @@
 import React, { useState, useEffect } from "react";
-import DateCountdown from 'react-date-countdown-timer';
-
+import Countdown from 'react-countdown';
 
 function Timer({endTime}) {
-    return <DateCountdown dateTo='May 03, 2024 20:52:00 GMT+07:00' callback={()=>alert('Hello')}  />;
+    const Completionist = () => <span>You are good to go!</span>;
+
+    const renderer = ({ days, hours, minutes, seconds, completed }) => {
+        if (completed) {
+            return <Completionist />;
+        } else {
+        return <span>{days}d {hours}h {minutes}m {seconds}s</span>;
+        }
+    };
+
+    const handleStart = () => {
+
+    }
+
+    return (
+        <>
+            <div><Countdown date={Date.now() + 100000000}  renderer={renderer} /></div>
+        </>
+    )
 }
 
 export default Timer;
