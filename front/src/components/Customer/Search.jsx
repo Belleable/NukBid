@@ -7,7 +7,7 @@ import Card from '../Card';
 
 function Search() {
     const [auth, setAuth] = useState(false);
-    const [goods, setGoods] = useState([]);
+    const [results, setResults] = useState([]);
 
     axios.defaults.withCredentials = true;
 
@@ -17,7 +17,7 @@ function Search() {
             try {
                 const res = await axios.get('http://localhost:3380/user/results')
                 if (res.data.success === true) {
-                    setGoods(res.data.data)
+                    setResults(res.data.data)
                 } else {
                     setAuth(false)
                 }
@@ -31,8 +31,8 @@ function Search() {
     return (
         <>
         <Nav />
-        <div>Search results : {goods.length} รายการ</div> 
-        {goods.length == 0 ? (<div className='no-match'>ขออภัย ไม่มีสินค้าที่ตรงกับคำค้นหาของคุณ</div>):(<Card product = {goods}/>)}
+        <div>Search results : {results.length} รายการ</div> 
+        {results.length == 0 ? (<div className='no-match'>ขออภัย ไม่มีสินค้าที่ตรงกับคำค้นหาของคุณ</div>):(<Card goods = {results}/>)}
         </>
     );
 }

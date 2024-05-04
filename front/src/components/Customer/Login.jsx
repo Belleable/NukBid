@@ -26,7 +26,9 @@ function Login() {
             });
             if (response.data.success = true) {
                 alert(response.data.success);
-                navigate('/home');
+                if (formData.username === ''){
+                    navigate('/admin')
+                } else {navigate('/home');}
             }
             else {
                 console.log('Login failed. Error:', response.data.error);

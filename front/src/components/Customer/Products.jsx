@@ -4,16 +4,16 @@ import axios from "axios"
 import Card from '../Card';
 
 function Products() {
-    const [goods, setGoods] = useState([])
+    const [products, setProducts] = useState([])
 
     axios.defaults.withCredentials = true;
 
     useEffect(() => {
-        const fetchmyproducts = async () => {
+        const fetchMyProducts = async () => {
             try {
                 const res = await axios.get('http://localhost:3380/myproducts')
                 if (res.data.success === true) {
-                    setGoods(res.data.data)
+                    setProducts(res.data.data)
                 }
                 else {
                     alert(res.data.text)
@@ -22,14 +22,12 @@ function Products() {
                 console.log(error.message)
             }
         }
-
-        fetchmyproducts()
+        fetchMyProducts()
     },[])
     return (
         <>
         <Nav />
-        <div>My products</div>
-        <Card deletable = {true} goods={goods}/>
+        <Card goods={products}/>
         </>
     );
 }

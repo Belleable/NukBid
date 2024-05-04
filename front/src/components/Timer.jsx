@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Countdown from 'react-countdown';
 
-function Timer({endTime = Date.now() + 86400000}) {
+function Timer({endTime}) {
     const end = new Date(endTime)
     const Completionist = () => <></>;
 

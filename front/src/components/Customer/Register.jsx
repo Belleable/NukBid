@@ -23,7 +23,6 @@ function Register() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Check if passwords match
         if (formData.password !== formData.conf_pw) {
             alert('Password and confirm password do not match. Please try again.');
             return;
@@ -31,10 +30,8 @@ function Register() {
 
         try {
 
-            // Send the registration data to your server
             const response = await axios.post('http://localhost:3380/register', formData)
 
-            // Handle the response accordingly
             if(response.data.success === false){
                 alert(response.data.text)
             }

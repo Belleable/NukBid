@@ -3,6 +3,8 @@ import { Helmet } from 'react-helmet';
 import axios from 'axios';
 import { useParams, useNavigate } from "react-router-dom";
 
+// มาใส่ซอกเก้ตหน้านี้
+
 function Details() {
     const navigate = useNavigate();
 

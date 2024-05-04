@@ -27,11 +27,10 @@ function Home() {
         fetch()
     }, []);
     
-
-    console.log(goods)
     return (
         <>
             <Nav />
+            <h4 className='bid-text'>สินค้าที่กำลังเปิดประมูล</h4>
             <Card goods={goods} />
         </>
     );

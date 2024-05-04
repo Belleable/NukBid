@@ -20,7 +20,7 @@ function SearchBox() {
         }
 
         try {
-            const response = await axios.post('http://localhost:3009/search', keyword)
+            const response = await axios.post('http://localhost:3380/search', keyword)
 
             if(response.data.status === "error"){
                 alert(response.data.error);
