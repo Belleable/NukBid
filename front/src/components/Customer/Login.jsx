@@ -5,7 +5,7 @@ import axios from 'axios';
 //import Cookies from 'universal-cookie';
 
 function Login() {
-const navigate = useNavigate()
+    const navigate = useNavigate()
     const [formData, setFormData] = useState({
         username: '',
         password: '',

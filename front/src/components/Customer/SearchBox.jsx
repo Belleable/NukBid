@@ -16,7 +16,6 @@ function SearchBox() {
         e.preventDefault();
 
         if (keyword == '') {
-            // alert('')
             return;
         }
 

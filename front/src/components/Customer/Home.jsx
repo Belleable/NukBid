@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
 import Nav from './Nav';
 import Card from '../Card';
 
 function Home() {
-    const navigate = useNavigate();
-
     const [auth, setAuth] = useState(false);
     const [goods, setGoods] = useState([]);
 
@@ -34,6 +31,7 @@ function Home() {
     console.log(goods)
     return (
         <>
+            <Nav />
             <Card goods={goods} />
         </>
     );

@@ -6,9 +6,6 @@ import Nav from './Nav';
 import Card from '../Card';
 
 function Search() {
-
-    const navigate = useNavigate();
-
     const [auth, setAuth] = useState(false);
     const [goods, setGoods] = useState([]);
 
@@ -16,37 +13,26 @@ function Search() {
 
     useEffect(()=>{
         
-        axios.get('http://localhost:3009/results').then(res => {
-            if (res.data.status === "success") {
-                setAuth(true)
-                navigate('/login')
-            } else {
-                setAuth(false)
-            }
-        })
-
-        const fetchAllResults = async ()=>{
-            try{
-                const res = await axios.get("http://localhost:3009/home");
-                setGoods(res.data);
-            }catch(err){
-                console.log(err);
+        const fetchAllResults = async () => {
+            try {
+                const res = await axios.get('http://localhost:3380/user/results')
+                if (res.data.success === true) {
+                    setGoods(res.data.data)
+                } else {
+                    setAuth(false)
+                }
+            } catch (error) {
+                console.log(error.text)
             }
         }
-        fetchAllResults();
+        fetchAllResults()
     }, []);
-    
-
-    console.log(goods);
-    console.log(goods.length);
-
 
     return (
         <>
         <Nav />
         <div>Search results : {goods.length} รายการ</div> 
-        {/* เอาที่ผู้ใช้เสิชไปเขียนบนหน้านึงแล้ว fetch มาดิสเพลย์หน้านี้ */}
-        <Card product = {goods}/>
+        {goods.length == 0 ? (<div className='no-match'>ขออภัย ไม่มีสินค้าที่ตรงกับคำค้นหาของคุณ</div>):(<Card product = {goods}/>)}
         </>
     );
 }
