@@ -33,6 +33,9 @@ const upload = multer({ storage: storage })
 
 /////////////// Test
 router.post('/sendtext', sendEmail)
+router.get('/testlive/:id', (req, res) => {
+      res.json("hello")
+})
 
 ////////////////////////////// Real
 router.post('/admin', VerifyAdmin)
@@ -58,6 +61,8 @@ router.put('/user/products/:goodsid', goodBidding)
 router.get('/user/profile', profile)// checkอีกที
 router.get('/user/profile/edit', profile)//
 router.put('/user/profile/edit', editprofile)//
+
+router.get('/myproducts', userWin)
 
 /* Alreary success */
 //goodInfo, VerifyAdmin and User, Login(อย่าลืมแก้เข้ารหัสคืนด้วย), Signup, Logout, 
