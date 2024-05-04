@@ -10,6 +10,7 @@ import AdminHome from './components/Admin/AdminHome.jsx';
 import Add from './components/Admin/AddProduct.jsx';
 import Login from './components/Customer/Login.jsx'
 import Register from './components/Customer/Register.jsx';
+import ProductDetails from './testLive.jsx';
 
 const router = createBrowserRouter([
   {
@@ -43,7 +44,10 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element:  <Register />
-  },
+  },{
+    path: '/testlive/:id',
+    element: <ProductDetails />
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

@@ -13,7 +13,7 @@ const goodSchema = new mongoose.Schema({
             type: String,
       },
       endTime: {
-            type: String,
+            type: Date,
             require: true
       },
       topBuyer: {
