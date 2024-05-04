@@ -27,6 +27,7 @@ function Products() {
     return (
         <>
         <Nav />
+        <h4 className='bid-text'>สินค้าที่ประมูลได้</h4>
         <Card goods={products}/>
         </>
     );

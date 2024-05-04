@@ -28,7 +28,7 @@ function Bid() {
     return (
         <>
         <Nav />
-        <div>สินค้าที่ท่านกำลังประมูล</div>
+        <h4 className='bid-text'>สินค้าที่ท่านกำลังประมูล</h4>
         <Card goods={goods} isDeletable={true}/>
 
         </>

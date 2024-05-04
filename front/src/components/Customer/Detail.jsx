@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 import axios from 'axios';
 import { useParams, useNavigate } from "react-router-dom";
 
-// มาใส่ซอกเก้ตหน้านี้ ยังบ่เสรจ
+// มาใส่ซอกเก้ตหน้านี้
 
 function Details() {
     const navigate = useNavigate();
@@ -12,7 +12,6 @@ function Details() {
 
     const {goodsID} = useParams();
     const [goodsInfo, setGoodsInfo] = useState([]);
-
     
     useEffect(() => {
         const fetchGoodsInfo = async () => {
