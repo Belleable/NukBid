@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 import axios from 'axios';
 import { useParams, useNavigate } from "react-router-dom";
 
-// มาใส่ซอกเก้ตหน้านี้
+// มาใส่ซอกเก้ตหน้านี้ ยังบ่เสรจ
 
 function Details() {
     const navigate = useNavigate();
