@@ -2,6 +2,7 @@ import React from 'react';
 import AdminNav from './AdminNav';
 import Card from '../Card';
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 function AdminHome() {
     const [auth, setAuth] = useState(false);

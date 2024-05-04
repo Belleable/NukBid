@@ -38,7 +38,7 @@ function Details() {
                     {/* {pets.petID && <img src={pets.petPfpUrl} />} */}
                         <div class="text">
                             <h2>{goodsInfo.goodsName}</h2>
-                            <div>{goodsInfo.properties}</div>
+                            <p>{goodsInfo.properties}</p>
                             <table>
                                 <tr>
                                     <th>เวลาที่เหลือ</th>
@@ -56,7 +56,7 @@ function Details() {
                                 <label> เสนอราคา
                                     <input />
                                 </label>
-                                <div>เพิ่มได้ทีละไม่ต่ำกว่า {goodsInfo.leastAdd} บาท</div>
+                                <p>เพิ่มได้ทีละไม่ต่ำกว่า {goodsInfo.leastAdd} บาท</p>
                                 <div className='submit-cancel'>
                                     <button type='submit' className='submit-btn'>ตกลง</button>
                                     {/* มีให้ยืนยันเป็นป็อปอัพก่อนจะอัพเดต */}

@@ -10,6 +10,7 @@ import AdminHome from './components/Admin/AdminHome.jsx';
 import Add from './components/Admin/AddProduct.jsx';
 import Login from './components/Customer/Login.jsx'
 import Register from './components/Customer/Register.jsx';
+import Sold from './components/Admin/Sold.jsx';
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element:  <Register />
+  },
+  {
+    path: "/sold",
+    element:  <Sold />
   },
 ]);
 

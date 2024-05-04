@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Nav from './Nav';
 import Card from '../Card';
+import axios from 'axios';
 
 function Bid() {
     const [auth, setAuth] = useState(false);

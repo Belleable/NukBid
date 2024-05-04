@@ -31,7 +31,7 @@ function Search() {
     return (
         <>
         <Nav />
-        <div>Search results : {results.length} รายการ</div> 
+        <p>Search results : {results.length} รายการ</p> 
         {results.length == 0 ? (<div className='no-match'>ขออภัย ไม่มีสินค้าที่ตรงกับคำค้นหาของคุณ</div>):(<Card goods = {results}/>)}
         </>
     );

@@ -15,7 +15,7 @@ function Timer({endTime}) {
 
     return (
         <>
-            <div><Countdown date={Date.now() + (end - Date.now())}  renderer={renderer}/></div>
+            <Countdown id="timer" date={Date.now() + (end - Date.now())}  renderer={renderer}/>
         </>
     )
 }

@@ -26,7 +26,7 @@ function Login() {
             });
             if (response.data.success = true) {
                 alert(response.data.success);
-                if (formData.username === ''){
+                if (response.data.isAdmin){
                     navigate('/admin')
                 } else {navigate('/home');}
             }
