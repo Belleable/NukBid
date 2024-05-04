@@ -1,15 +1,18 @@
 import Goods from "../../api/models/Goods.js";
 import Pics from "../../api/models/Pics.js";
 import fs from "fs";
+import moment from "moment";
 
 export const addProduct = async (req, res) => {
-    const { goodName, openPrice, maxPrice, endTime, leastAdd, properties } = req.body;
+    const { goodName, openPrice, maxPrice, endTime, leastAdd, properties, endDate } = req.body;
     const allimage = [];
 
     try {
-        if ( !goodName || !openPrice || !maxPrice || !endTime || !leastAdd || !properties || !req.files) {
+        /*if ( !goodName || !openPrice || !maxPrice || !endDate || !endTime || !leastAdd || !properties) {
             return res.status(400).json({ success: false, text: "Please provide all necessary information and at least one image" });
-        }
+        }*/
+        const combinedDateTimeString = `${endDate}T${endTime}`;
+        const changeTimezone = moment.utc(combinedDateTimeString).utcOffset(7 * 60).toDate();
 
         const fileToBase64 = (filePath) => {
             return new Promise((resolve, reject) => {
@@ -32,13 +35,13 @@ export const addProduct = async (req, res) => {
             });
         }
 
-        const newProduct = new Goods({ ...req.body, status: "bidding" });
+        const newProduct = new Goods({ ...req.body, endTime: changeTimezone, status: "bidding" });
         await newProduct.save();
 
         const newPics = new Pics({ picLink: allimage, goodsID: newProduct._id });
         await newPics.save();
 
-        res.json({ success: true, message: "Add product successfully", product: newProduct, pics: newPics });
+        res.json({ success: true, message: "Add product successfully"/*, product: newProduct, pics: newPics*/ });
 
     } catch (error) {
         res.json({ success: false, text: "Failed to add product and images", error: error.message });

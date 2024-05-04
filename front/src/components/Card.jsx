@@ -10,6 +10,7 @@ function Card({goods, deletable = false}) {
             {goods.map((good, goodindex) => (
                 <Link key={goodindex} to={`/detail/${good.goodsID}`} style={{ textDecoration: 'none' }}> 
                     <div className='card'>
+                        <img src={`data:${good.image.contentType};base64,${good.image.data}`} alt="Product" />
                         <span>{good.maxPrice}฿</span>
                         <Timer endTime = {good.endTime}/>
                         <h3>{good.goodsName}</h3>
@@ -18,7 +19,7 @@ function Card({goods, deletable = false}) {
                 </Link>
             ))}
         </>
-    )
+    );
 }
 
 export default Card;
