@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import Pic from '../../images/pic.jpg';
 import SearchBox from './SearchBox.jsx'
 
-
 function Nav() {
     const [pfp, setPfp] = useState([]);
 
@@ -32,7 +31,7 @@ function Nav() {
                 </ul>
             </div>
             <SearchBox />
-            <img className='pfp' src={pfp} />
+            {pfp ? (<img className='pfp' src={pfp} />):(<img className='pfp' src={Pic} />)}
         </nav>
     );
 }

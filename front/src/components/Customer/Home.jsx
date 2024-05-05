@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Helmet } from 'react-helmet';
 import axios from 'axios';
 import Nav from './Nav';
 import Card from '../Card';
+import Head from '../Head';
 
 function Home() {
     const [auth, setAuth] = useState(false);
@@ -29,6 +29,7 @@ function Home() {
     
     return (
         <>
+            <Head title="หน้าหลัก" />
             <Nav />
             {/* แทรกรูปแบนเนอร์ */}
             <h4 className='bid-text'>สินค้าที่กำลังเปิดประมูล</h4>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Nav from './Nav';
 import axios from "axios"
 import Card from '../Card';
+import Head from '../Head';
 
 function Products() {
     const [products, setProducts] = useState([])
@@ -26,6 +27,7 @@ function Products() {
     },[])
     return (
         <>
+        <Head title="สินค้าของคุณ" />
         <Nav />
         <h4 className='bid-text'>สินค้าที่ประมูลได้</h4>
         <Card goods={products}/>

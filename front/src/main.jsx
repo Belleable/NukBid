@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import './font.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from './components/Customer/Home.jsx';
 import Bid from './components/Customer/Bid.jsx';

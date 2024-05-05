@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import AdminNav from './AdminNav';
 import Card from '../Card';
+import Head from '../Head';
 
 function Sold() {
     const [auth, setAuth] = useState(false);
@@ -27,6 +28,7 @@ function Sold() {
 
     return (
         <>
+        <Head title="ปิดประมูลแล้ว" />
         <AdminNav />
         <h4 className='bid-text'>สินค้าที่ปิดประมูลแล้ว</h4>
         <Card goods={goods}/>

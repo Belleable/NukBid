@@ -1,8 +1,8 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { Helmet } from 'react-helmet';
 import axios from 'axios';
 import { Link, useNavigate } from "react-router-dom";
 import Pic from '../../images/pic.jpg';
+import Head from '../Head';
 
 function Edit() {
     const inputRef = useRef(null);
@@ -46,7 +46,7 @@ function Edit() {
                     canvas.toBlob(
                         (blob) => {
                             const file = new File([blob], imgName, {
-                                type: 'image/png',
+                                type: 'image/*',
                                 lastModified: Date.now(),
                             });
 
@@ -108,6 +108,7 @@ function Edit() {
 
     return (
         <>
+            <Head title="แก้ไขโปรไฟล์" />
             <Link to='/userprofile' className='back-btn'>ย้อนกลับ</Link>
 
             <main>

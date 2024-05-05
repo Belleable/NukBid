@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Helmet } from 'react-helmet';
 import axios from 'axios';
 import { Link } from "react-router-dom";
+import Head from '../Head';
+import Pic from '../../images/pic.jpg';
 
 function Profile() {
     const [profile, setProfile] = useState([]);
@@ -29,12 +30,12 @@ function Profile() {
 
     return (
         <>
-            <Link to='/user/home' className='back-btn'>ย้อนกลับ</Link>
-
             {profile.map(user => (
                 <div className="profile-container" key={user.id}>
+                    <Head title={user.username} />
+                    <Link to='/user/home' className='back-btn'>ย้อนกลับ</Link>
                     <h1>โปรไฟล์</h1>
-                    <img src={user.pfp} alt="User Pfp" />
+                    {user.pfp ? (<img src={user.pfp} alt="User Pfp" />):(<img src={Pic} alt="User Pfp" />)}
                     <h2>{user.username}</h2>
                     <h3>{user.fname} {user.lname}</h3>
                     <div className='user-contact'>

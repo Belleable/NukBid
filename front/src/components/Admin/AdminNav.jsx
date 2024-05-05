@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Pic from '../../images/pic.jpg';
+import Pic from '../../images/pic.jpg'; {/**เดี๋ยวค่อยเอาโปรไฟล์ดีฟอลต์มาแทน */}
 
 function AdminNav() {
     return (

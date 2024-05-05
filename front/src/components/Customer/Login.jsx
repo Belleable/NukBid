@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
 import axios from 'axios';
+import Head from '../Head';
 //import Cookies from 'universal-cookie';
 
 function Login() {
@@ -42,6 +42,7 @@ function Login() {
     };
     return (
         <div className="Login">
+            <Head title="เข้าสู่ระบบ NukBid"/>
             <h1>Log in</h1>
             <form action="/login" method="post" onSubmit={handleSubmit}>
                 <label htmlFor="username">Username

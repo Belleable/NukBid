@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Helmet } from 'react-helmet';
 import axios from 'axios';
 import { useParams, useNavigate } from "react-router-dom";
+import Head from '../Head';
 
 // มาใส่ซอกเก้ตหน้านี้
 
@@ -30,6 +30,7 @@ function Details() {
 
     return (
         <>
+            <Head title = {goodsInfo.goodsName} />
             <header>
                 <h1>รายละเอียดสินค้า</h1>
             </header>

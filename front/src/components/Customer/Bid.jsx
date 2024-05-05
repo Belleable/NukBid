@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Nav from './Nav';
 import Card from '../Card';
 import axios from 'axios';
+import Head from '../Head';
 
 function Bid() {
     const [auth, setAuth] = useState(false);
@@ -28,10 +29,10 @@ function Bid() {
 
     return (
         <>
-        <Nav />
-        <h4 className='bid-text'>สินค้าที่ท่านกำลังประมูล</h4>
-        <Card goods={goods} isDeletable={true}/>
-
+            <Head title="กำลังประมูล" />
+            <Nav />
+            <h4 className='bid-text'>สินค้าที่ท่านกำลังประมูล</h4>
+            <Card goods={goods} isDeletable={true}/>
         </>
     );
 }
