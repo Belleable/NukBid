@@ -98,7 +98,7 @@ function Register() {
                     <label>Email
                         <input 
                         type="text" 
-                        placeholder="อีเมลล์" 
+                        placeholder="อีเมล" 
                         name="email" 
                         value={formData.email}
                         onChange={handleChange}

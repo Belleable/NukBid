@@ -29,6 +29,8 @@ function Profile() {
 
     return (
         <>
+            <Link to='/user/home' className='back-btn'>ย้อนกลับ</Link>
+
             {profile.map(user => (
                 <div className="profile-container" key={user.id}>
                     <h1>โปรไฟล์</h1>
@@ -37,7 +39,7 @@ function Profile() {
                     <h3>{user.fname} {user.lname}</h3>
                     <div className='user-contact'>
                         <div className='tel-email'>
-                            <label>อีเมลล์
+                            <label>อีเมล
                                 <p>{user.email}</p>
                             </label>
                             <label>เบอร์โทรศัพท์
