@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import io from 'socket.io-client';
 import { useParams, useNavigate } from "react-router-dom";
 import Head from '../Head';
-
-// มาใส่ซอกเก้ตหน้านี้
+import Nav from './Nav';
 
 function Details() {
+    const [price, setPrice] = useState('');
+    const [socket, setSocket] = useState(null);
     const navigate = useNavigate();
 
     axios.defaults.withCredentials = true;
@@ -25,15 +27,51 @@ function Details() {
         };
 
         fetchGoodsInfo();
+
+        const newSocket = io('http://localhost:3380');
+        setSocket(newSocket);
+        // Clean up the socket connection on unmount
+        return () => {
+            newSocket.close();
+        };
+
     }, []);
     console.log(goodsInfo)
+
+    useEffect(() => {
+        if (socket) {
+            socket.emit('joinProductRoom', goodsID);
+
+            socket.on('newMessageNotification', (message) => {
+                  setPrice(message.price)
+              });
+        }
+    }, [socket]);
+
+    const handleChange = (e) => {
+        setPrice(e.target.value)
+    }
+
+    console.log("socket:  " + socket)
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const res = await axios.put('http://localhost:3380/user/products/:goodsid', price)
+        if ( res.data.success === true ) {
+              socket.emit('newMessage', { message: "Price has Already change", goodsID: goodsID, price: price });
+        } else {
+              alert(res.data.text)
+        }
+    };
+
+    const handleClick = (e) => {
+        setPrice('');
+    }
 
     return (
         <>
             <Head title = {goodsInfo.goodsName} />
-            <header>
-                <h1>รายละเอียดสินค้า</h1>
-            </header>
+            <Nav />
             <main>
                 <div className="GoodsInfo" key={goodsInfo.goodsID}>
                     <div className='img'>
@@ -51,19 +89,18 @@ function Details() {
                                 <th>ผู้เสนอราคาสูงสุด</th>
                                 <td>
                                     <span id="topBuyer">{goodsInfo.topBuyer}</span>
-                                    <span id="maxPrice">{goodsInfo.maxPrice}</span>
+                                    <span id="maxPrice">{price}</span>
                                 </td>
                             </tr>
                         </table>
-                        <form>
+                        <form onSubmit={ handleSubmit }>
                             <label> เสนอราคา
-                                <input />
+                                <input value={price} onChange={ handleChange } />
                             </label>
                             <p>เพิ่มได้ทีละไม่ต่ำกว่า {goodsInfo.leastAdd} บาท</p>
                             <div className='submit-cancel'>
                                 <button type='submit' className='submit-btn'>ตกลง</button>
-                                {/* มีให้ยืนยันเป็นป็อปอัพก่อนจะอัพเดต */}
-                                <button className='cancel-btn'>ยกเลิก</button>
+                                <button className='cancel-btn' onClick={handleClick}>ยกเลิก</button>
                             </div>
                         </form>
                     </div>
