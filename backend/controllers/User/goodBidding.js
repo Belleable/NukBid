@@ -5,7 +5,8 @@ import { sendEmail } from "../EmailTemplate.js";
 import Users from "../../api/models/Users.js";
 
 export const goodBidding = async (req, res) => {
-      const { price, goodsid } = req.body;
+      const { price } = req.body;
+      const { goodsid } = req.params;
       const usercookie = req.cookies.userLoggedIn;
       const userId = jwt.decode(usercookie, process.env.JWT_SECRET).id;
       const goodsId = new mongoose.Types.ObjectId(goodsid);
@@ -50,8 +51,6 @@ export const goodBidding = async (req, res) => {
             
             const bid_good = await Goods.findOneAndUpdate({ _id: goodsId }, { topBuyer: objectId, maxPrice: price })
             sendEmail('link_product', allUser_bidding.map(user => user.email))
-
-            //เหลือทำ ไลฟ์
 
             res.json({success: true, text: "บิดล้ะ"})
       } catch (error) {

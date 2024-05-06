@@ -18,24 +18,27 @@ import { userHomeSearch } from "../../controllers/User/userHomeSearch.js";
 import { adminHome } from "../../controllers/Admin/adminHome.js";
 import { goodBidding } from "../../controllers/User/goodBidding.js";
 import { sendEmail } from "../../controllers/sendEmail.js";
+import { addPic } from "../../controllers/addPic.js";
 
 const router = express.Router();
 const storage = multer.diskStorage({
-      /*destination: (req, file, cb) => {
-            cb(null, '../../public/images')
-      },*/
+      destination: (req, file, cb) => {
+            cb(null, 'public')
+      },
       filename: (req, file, cb) => {
-            console.log(file)
-            cb(null, Date.now() + path.extname(file.originalname))
+            cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
+            //Date.now() + path.extname(file.originalname)
       }
 })
-const upload = multer({ storage: storage })
+//const upload = multer()
+const upload = multer({storage: storage})
 
 /////////////// Test
 router.post('/sendtext', sendEmail)
 router.get('/testlive/:id', (req, res) => {
       res.json("hello")
 })
+router.post('/addpic', upload.array('image', 5), addPic)
 
 ////////////////////////////// Real
 router.post('/admin', VerifyAdmin)
@@ -62,7 +65,9 @@ router.get('/user/profile', profile)// checkอีกที
 router.get('/user/profile/edit', profile)//
 router.put('/user/profile/edit', editprofile)//
 
+/* ---- Belle Path ---- */
 router.get('/myproducts', userWin)
+router.post('/search', userHomeSearch)//
 
 /* Alreary success */
 //goodInfo, VerifyAdmin and User, Login(อย่าลืมแก้เข้ารหัสคืนด้วย), Signup, Logout, 

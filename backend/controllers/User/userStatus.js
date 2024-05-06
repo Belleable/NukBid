@@ -23,7 +23,7 @@ export const userBidding = async (req, res) => {
                   },
                   {
                       $lookup: {
-                          from: "pics",
+                          from: "pictures",
                           localField: "_id",
                           foreignField: "goodsID",
                           as: "images"
@@ -70,6 +70,7 @@ export const userWin = async (req, res) => {
       const usercookie = req.cookies.userLoggedIn;
       const userId = jwt.decode(usercookie, process.env.JWT_SECRET).id;
       const objectId = new mongoose.Types.ObjectId(userId);
+      console.log(objectId)
       //const biddingwin = (await Goods.find({$and: [{status: "end"}, {topBuyer: objectId}]})).map(good => new mongoose.Types.ObjectId(good.goodsID));
       /*const allGoods = await Goods.find({$and: [{status: "end"}, {topBuyer: userId}]}).populate({
             path: "images",
@@ -87,7 +88,7 @@ export const userWin = async (req, res) => {
                   },
                   {
                       $lookup: {
-                          from: "pics",
+                          from: "pictures",
                           localField: "_id",
                           foreignField: "goodsID",
                           as: "images"
@@ -118,16 +119,14 @@ export const userWin = async (req, res) => {
                           endTime: 1,
                           image: {
                               contentType: "$firstImage.contentType",
-                              // data: "$firstImage.data"
+                              data: "$firstImage.data"
                           }
                       }
                   }
               ]);
               
-              console.log(goods_bidwin);
+              //console.log(goods_bidwin);
               
-                          
-    
             res.json({success: true, data: goods_bidwin });
       } catch (error) {
             res.status(500).json({ message: "", error: error.message });

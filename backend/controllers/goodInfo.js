@@ -9,7 +9,7 @@ export const goodInfo = async (req, res) => {
             { $match: { _id: objectId } },
             {
                 $lookup: {
-                    from: "pics", // The collection name containing images linked to goods
+                    from: "pictures", // The collection name containing images linked to goods
                     localField: "_id",
                     foreignField: "goodsID",
                     as: "images"

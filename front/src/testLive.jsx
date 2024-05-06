@@ -29,9 +29,14 @@ const ProductDetails = () => {
         }
     }, [socket]);
 
-      const handleNewMessage = (e) => {
+      const handleNewMessage = async (e) => {
             e.preventDefault();
-            socket.emit('newMessage', { message: "Price has Already change", id: id, price: price }); // Emit newMessage event with goodsID and price
+            const res = await axios.put('http://localhost:3380/user/products/:goodsid', price)
+            if ( res.data.success === true ) {
+                  socket.emit('newMessage', { message: "Price has Already change", id: id, price: price });
+            } else {
+                  alert(res.data.text)
+            }
       };
 
       const handleChange = (e) => {

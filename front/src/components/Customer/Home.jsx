@@ -15,10 +15,11 @@ function Home() {
         const fetch = async () => {
             try {
                 const res = await axios.get('http://localhost:3380/user/home')
-                if (res.data.success === true) {
-                    setGoods(res.data.data)
-                } else {
+                if (res.data.success === false) {
                     setAuth(false)
+                } else {
+                
+                    setGoods(res.data.data)
                 }
             } catch (error) {
                 console.log(error.text)
@@ -26,6 +27,8 @@ function Home() {
         }
         fetch()
     }, []);
+
+    console.log(goods)
     
     return (
         <>

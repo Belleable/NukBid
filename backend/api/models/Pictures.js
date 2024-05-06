@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
 
-const pictureSchema = new mongoose.Schema({
+const picturesSchema = new mongoose.Schema({
       
       picLink: [
             {
                   contentType: String,
-                  data: Buffer
-            },
+                  data: String
+            }/*,
             {
                   contentType: String,
                   data: Buffer
@@ -22,7 +22,7 @@ const pictureSchema = new mongoose.Schema({
             {
                   contentType: String,
                   data: Buffer
-            }
+            }*/
       ],
       goodsID: {
             type: mongoose.Schema.Types.ObjectId,
@@ -30,4 +30,4 @@ const pictureSchema = new mongoose.Schema({
       },
 })
 
-export default mongoose.model("Pics", pictureSchema);
+export default mongoose.model('pictures', picturesSchema)

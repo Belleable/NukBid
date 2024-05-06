@@ -17,7 +17,7 @@ export const goodsSuccess = async (req, res) => {
                 },
                 {
                     $lookup: {
-                        from: "pics",
+                        from: "pictures",
                         localField: "_id",
                         foreignField: "goodsID",
                         as: "images"

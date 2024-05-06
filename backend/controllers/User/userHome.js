@@ -21,7 +21,7 @@ export const userHome = async (req, res) => {
                 },
                 {
                     $lookup: {
-                        from: "pics",
+                        from: "pictures",
                         localField: "_id",
                         foreignField: "goodsID",
                         as: "images"
@@ -55,13 +55,13 @@ export const userHome = async (req, res) => {
                         endTime: 1,
                         image: {
                             contentType: "$firstImage.contentType",
-                            // data: "$firstImage.data"
+                            data: "$firstImage.data"
                         }
                     }
                 }
         ]);
-          
-          res.json({data: allGoods});
+            console.log(allGoods)
+          res.json({success: true, data: allGoods});
     } catch (error) {
         console.error("Error fetching goods:", error);
         res.status(500).json({ success: false, text: "Failed to fetch goods" });
