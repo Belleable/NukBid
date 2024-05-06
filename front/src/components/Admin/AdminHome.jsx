@@ -2,6 +2,8 @@ import React from 'react';
 import AdminNav from './AdminNav';
 import Card from '../Card';
 import { Link } from "react-router-dom";
+import axios from 'axios';
+import Head from '../Head';
 
 function AdminHome() {
     const [auth, setAuth] = useState(false);
@@ -28,6 +30,7 @@ function AdminHome() {
 
     return (
         <>
+        <Head title="หน้าหลัก"/>
         <AdminNav />
         <h4 className='bid-text'>สินค้าที่กำลังเปิดประมูล</h4>
         <Link to='/add-product' style={{ textDecoration: 'none' }}>เพิ่มสินค้า</Link>

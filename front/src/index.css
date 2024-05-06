@@ -92,3 +92,7 @@ nav li {
 .login-btn {
   display: inline;
 }
+
+.file-input input {
+  display: none;
+}

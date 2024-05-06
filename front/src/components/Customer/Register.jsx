@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-// import { Helmet } from 'react-helmet';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import Head from '../Head';
 
 function Register() {
     const navigate = useNavigate()
@@ -65,6 +65,7 @@ function Register() {
 
     return (
         <div className="Register container">
+            <Head title="สมัครใช้งาน NukBid"/>
             <h3>Registration</h3>
             <form action="#" onSubmit={handleSubmit}>
                 <div className="user-details">
@@ -98,7 +99,7 @@ function Register() {
                     <label>Email
                         <input 
                         type="text" 
-                        placeholder="อีเมลล์" 
+                        placeholder="อีเมล" 
                         name="email" 
                         value={formData.email}
                         onChange={handleChange}

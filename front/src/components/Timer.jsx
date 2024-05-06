@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Countdown from 'react-countdown';
 
 function Timer({endTime}) {
@@ -15,7 +15,7 @@ function Timer({endTime}) {
 
     return (
         <>
-            <div><Countdown date={Date.now() + (end - Date.now())}  renderer={renderer}/></div>
+            <Countdown id="timer" date={Date.now() + (end - Date.now())}  renderer={renderer}/>
         </>
     )
 }

@@ -1,10 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Pic from '../../images/pic.jpg';
 import SearchBox from './SearchBox.jsx'
 
-
 function Nav() {
+    const [pfp, setPfp] = useState([]);
+
+    axios.defaults.withCredentials = true;
+
+    useEffect(() => {
+        const fetchPfp = async () => {
+            try {
+                const res = await axios.get("http://localhost:3380/userpfp");
+                setPfp(res.data);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        fetchPfp();
+    }, []);
+
     return (
         <nav>
             <Link className='Logo' to='/'>Nuk-Bid</Link>
@@ -16,7 +31,7 @@ function Nav() {
                 </ul>
             </div>
             <SearchBox />
-            <img className='pfp' src={Pic} />
+            {pfp ? (<img className='pfp' src={pfp} />):(<img className='pfp' src={Pic} />)}
         </nav>
     );
 }
