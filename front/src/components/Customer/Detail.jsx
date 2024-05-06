@@ -36,36 +36,38 @@ function Details() {
             </header>
             <main>
                 <div className="GoodsInfo" key={goodsInfo.goodsID}>
-                    {/* {pets.petID && <img src={pets.petPfpUrl} />} */}
-                        <div class="text">
-                            <h2>{goodsInfo.goodsName}</h2>
-                            <p>{goodsInfo.properties}</p>
-                            <table>
-                                <tr>
-                                    <th>เวลาที่เหลือ</th>
-                                    <td id="timeleft">{goodsInfo.time}</td>
-                                </tr>
-                                <tr>
-                                    <th>ผู้เสนอราคาสูงสุด</th>
-                                    <td>
-                                        <span id="topBuyer">{goodsInfo.topBuyer}</span>
-                                        <span id="maxPrice">{goodsInfo.maxPrice}</span>
-                                    </td>
-                                </tr>
-                            </table>
-                            <form>
-                                <label> เสนอราคา
-                                    <input />
-                                </label>
-                                <p>เพิ่มได้ทีละไม่ต่ำกว่า {goodsInfo.leastAdd} บาท</p>
-                                <div className='submit-cancel'>
-                                    <button type='submit' className='submit-btn'>ตกลง</button>
-                                    {/* มีให้ยืนยันเป็นป็อปอัพก่อนจะอัพเดต */}
-                                    <button className='cancel-btn'>ยกเลิก</button>
-                                </div>
-                            </form>
-                        </div>
+                    <div className='img'>
+                        {/* <img src={goodsInfo.pic}/> */}
                     </div>
+                    <div className="text">
+                        <h2>{goodsInfo.goodsName}</h2>
+                        <p>{goodsInfo.properties}</p>
+                        <table>
+                            <tr>
+                                <th>เวลาที่เหลือ</th>
+                                <td id="timeleft">{goodsInfo.time}</td>
+                            </tr>
+                            <tr>
+                                <th>ผู้เสนอราคาสูงสุด</th>
+                                <td>
+                                    <span id="topBuyer">{goodsInfo.topBuyer}</span>
+                                    <span id="maxPrice">{goodsInfo.maxPrice}</span>
+                                </td>
+                            </tr>
+                        </table>
+                        <form>
+                            <label> เสนอราคา
+                                <input />
+                            </label>
+                            <p>เพิ่มได้ทีละไม่ต่ำกว่า {goodsInfo.leastAdd} บาท</p>
+                            <div className='submit-cancel'>
+                                <button type='submit' className='submit-btn'>ตกลง</button>
+                                {/* มีให้ยืนยันเป็นป็อปอัพก่อนจะอัพเดต */}
+                                <button className='cancel-btn'>ยกเลิก</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </main>
         </>
     )
