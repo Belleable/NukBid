@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
 function SearchBox() {
@@ -20,8 +19,7 @@ function SearchBox() {
         }
 
         try {
-            const response = await axios.post('http://localhost:3380/search')
-
+            
             if(response.data.status === "error"){
                 alert(response.data.error);
             }

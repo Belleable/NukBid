@@ -35,7 +35,7 @@ function Search() {
         <>
         <Head title="ผลการค้นหา"/>
         <Nav />
-        <p>Search results : {results.length} รายการ</p> 
+        <p>ผลหารค้นหาสำหรับ "{keyword}" : {results.length} รายการ</p> 
         {results.length == 0 ? (<div className='no-match'>ขออภัย ไม่มีสินค้าที่ตรงกับคำค้นหาของคุณ</div>):(<Card goods = {results}/>)}
         </>
     );
