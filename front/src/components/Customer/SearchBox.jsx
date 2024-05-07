@@ -20,13 +20,15 @@ function SearchBox() {
 
         try {
             
-            if(response.data.status === "error"){
+            /*if(response.data.status === "error"){
                 alert(response.data.error);
             }
             else{
                 alert(response.data.success);
-                navigate(`/results?keyword=${keyword}`);
-            }
+                navigate(`/results/${keyword}`);
+            }*/
+
+            navigate(`/user/results/${keyword}`);
             
         } catch (error) {
             console.error('Search error:', error);
