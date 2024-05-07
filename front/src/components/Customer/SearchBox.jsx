@@ -20,14 +20,14 @@ function SearchBox() {
         }
 
         try {
-            const response = await axios.post('http://localhost:3380/search', keyword)
+            const response = await axios.post('http://localhost:3380/search')
 
             if(response.data.status === "error"){
                 alert(response.data.error);
             }
             else{
                 alert(response.data.success);
-                navigate('/results');
+                navigate(`/results?keyword=${keyword}`);
             }
             
         } catch (error) {

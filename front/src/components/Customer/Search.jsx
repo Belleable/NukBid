@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import Nav from './Nav';
 import Card from '../Card';
@@ -8,13 +9,16 @@ function Search() {
     const [auth, setAuth] = useState(false);
     const [results, setResults] = useState([]);
 
+    const [ searchParams ] = useSearchParams()
+    const keyword = searchParams.get('keyword')
+
     axios.defaults.withCredentials = true;
 
     useEffect(()=>{
         
         const fetchAllResults = async () => {
             try {
-                const res = await axios.get('http://localhost:3380/user/results')
+                const res = await axios.get(`http://localhost:3380/user/results?keyword=${keyword}`)
                 if (res.data.success === true) {
                     setResults(res.data.data)
                 } else {
