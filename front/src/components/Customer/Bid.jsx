@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Nav from './Nav';
 import Card from '../Card';
 import axios from 'axios';
@@ -26,7 +26,7 @@ function Bid() {
         }
         fetchBidding()
     }, []);
-
+    console.log(goods)
     return (
         <>
             <Head title="กำลังประมูล" />

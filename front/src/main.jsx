@@ -14,6 +14,7 @@ import Register from './components/Customer/Register.jsx';
 import Sold from './components/Admin/Sold.jsx';
 import Edit from './components/Customer/EditProfile.jsx';
 import Profile from './components/Customer/Profile.jsx';
+import UserProf from './components/Customer/UserProf.jsx';
 
 const router = createBrowserRouter([
   {
@@ -58,7 +59,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/user/profile",
-    element:  <Profile />
+    element:  <UserProf />
   },
 ]);
 

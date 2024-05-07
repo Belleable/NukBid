@@ -13,6 +13,7 @@ export const userBidding = async (req, res) => {
             model: "Pics",
             select: "picLink"
       });*/
+      console.log(bidding)
       try {
             const goods_bidding = await Goods.aggregate([
                   { 
@@ -59,7 +60,7 @@ export const userBidding = async (req, res) => {
                       }
                   }
               ]);
-    
+              console.log(goods_bidding)
             res.json({ data: goods_bidding });
       } catch (error) {
             res.status(500).json({ message: "", error: error.message });

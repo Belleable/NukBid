@@ -68,7 +68,8 @@ router.put('/user/profile/edit',uploadprofile.single('picture'), editprofile)//
 
 /* ---- Belle Path ---- */
 router.get('/myproducts', userWin)
-router.post('/search', userHomeSearch)//
+router.post('/search', userHomeSearch)
+router.get('/bidding', userBidding)
 
 /* Alreary success */
 //goodInfo, VerifyAdmin and User, Login(อย่าลืมแก้เข้ารหัสคืนด้วย), Signup, Logout, 

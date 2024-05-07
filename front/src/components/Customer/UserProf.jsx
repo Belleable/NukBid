@@ -12,8 +12,8 @@ function UserProf() {
     useEffect(() => {
         const fetchUserProfile = async () => {
             try {
-                const res = await axios.get("http://localhost:3380/userprofile");
-                setProfile(res.data);
+                const res = await axios.get("http://localhost:3380/user/profile");
+                setProfile(res.data.data[0]);
             } catch (err) {
                 console.log(err);
             }
@@ -27,6 +27,7 @@ function UserProf() {
             window.location.reload(true);
         })
     }
+    console.log(profile)
 
     return (
         <>

@@ -40,6 +40,7 @@ function Login() {
         }
         setFormData({ username: '', password: '' });
     };
+    console.log(formData)
     return (
         <div className="Login">
             <Head title="เข้าสู่ระบบ NukBid"/>
