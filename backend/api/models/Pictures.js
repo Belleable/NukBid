@@ -6,23 +6,7 @@ const picturesSchema = new mongoose.Schema({
             {
                   contentType: String,
                   data: String
-            }/*,
-            {
-                  contentType: String,
-                  data: Buffer
-            },
-            {
-                  contentType: String,
-                  data: Buffer
-            },
-            {
-                  contentType: String,
-                  data: Buffer
-            },
-            {
-                  contentType: String,
-                  data: Buffer
-            }*/
+            }
       ],
       goodsID: {
             type: mongoose.Schema.Types.ObjectId,

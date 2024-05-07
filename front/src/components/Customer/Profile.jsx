@@ -12,8 +12,8 @@ function Profile() {
     useEffect(() => {
         const fetchUserProfile = async () => {
             try {
-                const res = await axios.get("http://localhost:3380/userprofile");
-                setProfile(res.data);
+                const res = await axios.get("http://localhost:3380/user/profile");
+                setProfile(res.data.data);
             } catch (err) {
                 console.log(err);
             }
@@ -27,7 +27,7 @@ function Profile() {
             window.location.reload(true);
         })
     }
-
+    
     return (
         <>
             {profile.map(user => (
@@ -35,7 +35,11 @@ function Profile() {
                     <Head title={user.username} />
                     <Link to='/user/home' className='back-btn'>ย้อนกลับ</Link>
                     <h1>โปรไฟล์</h1>
-                    {user.pfp ? (<img src={user.pfp} alt="User Pfp" />):(<img src={Pic} alt="User Pfp" />)}
+                    {user.profile ? (<img src={`data:image/jpeg;base64, ${Buffer.from(user.picture.data).toString('base64')}`} alt="User Pfp" />):(<img src={Pic} alt="User Pfp" />)}
+                    <img src={user.picture ? `data:image/jpeg;base64,${user.picture.data.toString('base64')}` : 'default_image_url'} alt="User Pfp" />
+
+                    
+                    <h2>{user.username}</h2>
                     <h2>{user.username}</h2>
                     <h3>{user.fname} {user.lname}</h3>
                     <div className='user-contact'>
@@ -55,7 +59,7 @@ function Profile() {
                     </div>
                     <div className='button'>
                         <Link to='/login' className="logout-btn" role="button" onClick={handleLogout}>ออกจากระบบ</Link>
-                        <Link to='/userprofile/edit' className="edit-btn" role="button">แก้ไขโปรไฟล์</Link>
+                        <Link to='/user/profile/edit' className="edit-btn" role="button">แก้ไขโปรไฟล์</Link>
                     </div>
                         
                 </div>

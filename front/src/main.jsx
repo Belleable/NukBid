@@ -53,11 +53,11 @@ const router = createBrowserRouter([
     element:  <Sold />
   },
   {
-    path: "/userprofile/edit",
+    path: "/user/profile/edit",
     element:  <Edit />
   },
   {
-    path: "/userprofile",
+    path: "/user/profile",
     element:  <Profile />
   },
 ]);

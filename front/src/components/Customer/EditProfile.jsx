@@ -8,7 +8,7 @@ function Edit() {
     const inputRef = useRef(null);
     const navigate = useNavigate();
     const [user, setUser] = useState({
-        pfp: '',
+        picture: null,
         fname: '',
         lname: '',
         email: '',
@@ -21,7 +21,7 @@ function Edit() {
     axios.defaults.withCredentials = true;
 
     const handleChange = (e) => {
-        if (e.target.name === 'pfp') {
+        if (e.target.name === 'picture') {
             const reader = new FileReader();
             const file = e.target.files[0];
             const imgName = e.target.files[0].name;
@@ -50,7 +50,7 @@ function Edit() {
                                 lastModified: Date.now(),
                             });
 
-                            setUser({ ...user, pfp: file})
+                            setUser({ ...user, picture: file})
                         },
                         "image/jpeg",
                         0.8
@@ -66,8 +66,14 @@ function Edit() {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const response = await axios.get(`http://localhost:3380/userprofile`); 
-                setUser(response.data[0]);
+                const response = await axios.get(`http://localhost:3380/user/profile`); 
+                setUser(prevUser => ({
+                    ...prevUser,
+                    ...response.data.data[0],
+                    picture: response.data.data[0].picture === null ? null : prevUser.picture, 
+                    password: ''
+                }));
+                //setUser(response.data.data[0])
             } catch (error) {
                 console.error('Error fetching user data:', error);
             }
@@ -76,7 +82,7 @@ function Edit() {
         fetchUserData();
     }, []);
 
-
+    console.log(user)
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -85,8 +91,17 @@ function Edit() {
             return;
         }
 
+        const formData = new FormData();
+        formData.append('fname', user.fname);
+        formData.append('lname', user.lname);
+        formData.append('email', user.email);
+        formData.append('tel', user.tel);
+        formData.append('password', user.password);
+        formData.append('address', user.address);
+        formData.append('picture', user.picture)
+
         try {
-            const resEdit = await axios.put(`http://localhost:3009/userprofile/edit`, user); 
+            const resEdit = await axios.put(`http://localhost:3380/user/profile/edit`, formData); 
             if (resEdit.data.status === "success") {
                 alert(resEdit.data.success);
                 navigate(`/userprofile`);
@@ -99,24 +114,26 @@ function Edit() {
     };
 
     const handleClick = () => {
-        navigate("/userprofile")
+        navigate(-1)
     }
 
     const handleImgClick = () => {
-        inputRef.current.click();
+        if (inputRef.current) {
+            inputRef.current.click();
+        }
     }
 
     return (
         <>
             <Head title="แก้ไขโปรไฟล์" />
-            <Link to='/userprofile' className='back-btn'>ย้อนกลับ</Link>
+            <Link to='/user/profile' className='back-btn'>ย้อนกลับ</Link>
 
             <main>
 
                 <form action="" onSubmit={handleSubmit}>
                     <div className='file-input' onClick={handleImgClick}>
-                        {user.pfp ? (<img src={URL.createObjectURL(user.pfp)} alt=''/>):(<img src={Pic} alt=''/>)}
-                        <input type='file' onChange={handleChange} ref={inputRef} name='pfp' />
+                        {user.picture  ? (<img src={URL.createObjectURL(user.picture)} alt=''/>):(<img src={Pic} alt=''/>)}
+                        <input type='file' onChange={handleChange} ref={inputRef} name='picture' />
                     </div>
 
                     <div className="text-input">

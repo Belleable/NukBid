@@ -36,12 +36,13 @@ const userSchema = new mongoose.Schema({
             default: false
       },
       picture: {
-            contentType: { 
+            /*contentType: { 
                   type: String 
             },
             data: { 
                   type: Buffer 
-            }
+            }*/
+            type: Buffer
       }
 })
 

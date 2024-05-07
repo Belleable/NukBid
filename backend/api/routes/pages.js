@@ -30,8 +30,10 @@ const storage = multer.diskStorage({
             //Date.now() + path.extname(file.originalname)
       }
 })
+
 //const upload = multer()
 const upload = multer({storage: storage})
+const uploadprofile = multer({storage: multer.memoryStorage()})
 
 /////////////// Test
 router.post('/sendtext', sendEmail)
@@ -62,8 +64,7 @@ router.get('/user/products/win', userWin)//
 router.get('/user/products/:goodsid', goodInfo)//
 router.put('/user/products/:goodsid', goodBidding)
 router.get('/user/profile', profile)// checkอีกที
-router.get('/user/profile/edit', profile)//
-router.put('/user/profile/edit', editprofile)//
+router.put('/user/profile/edit',uploadprofile.single('picture'), editprofile)//
 
 /* ---- Belle Path ---- */
 router.get('/myproducts', userWin)

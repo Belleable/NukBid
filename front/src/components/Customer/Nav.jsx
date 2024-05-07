@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Pic from '../../images/pic.jpg';
 import SearchBox from './SearchBox.jsx'
+import axios from "axios"
 
 function Nav() {
     const [pfp, setPfp] = useState([]);
@@ -11,7 +12,7 @@ function Nav() {
     useEffect(() => {
         const fetchPfp = async () => {
             try {
-                const res = await axios.get("http://localhost:3380/userpfp");
+                const res = await axios.get("http://localhost:3380/usernav");
                 setPfp(res.data);
             } catch (err) {
                 console.log(err);
