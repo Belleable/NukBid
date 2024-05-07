@@ -163,8 +163,8 @@ function Edit() {
                     </div>
 
                     <div class="CancelAndSubmit">
-                        <button id="cancel" class="button" onClick={handleClick}>ยกเลิก</button>
-                        <button id="submit" class="button" type="submit" name="submit">ยืนยัน</button>
+                        <button className='cancel-btn' onClick={handleClick}>ยกเลิก</button>
+                        <button className='submit-btn' type="submit" name="submit">ยืนยัน</button>
                     </div>
                 </form>
             </main>

@@ -104,8 +104,8 @@ function Details() {
                             </label>
                             <p>เพิ่มได้ทีละไม่ต่ำกว่า {goodsInfo.leastAdd} บาท</p>
                             <div className='submit-cancel'>
-                                <button type='submit' className='submit-btn'>ตกลง</button>
                                 <button className='cancel-btn' onClick={handleClick}>ยกเลิก</button>
+                                <button type='submit' className='submit-btn'>ตกลง</button>
                             </div>
                         </form>
                     </div>
