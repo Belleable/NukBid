@@ -28,7 +28,7 @@ function Login() {
                 alert(response.data.success);
                 if (response.data.isAdmin){
                     navigate('/admin')
-                } else {navigate('/home');}
+                } else {navigate('/user/home');}
             }
             else {
                 console.log('Login failed. Error:', response.data.error);
