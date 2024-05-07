@@ -72,7 +72,6 @@ function Edit() {
                 console.error('Error fetching user data:', error);
             }
         };
-
         fetchUserData();
     }, []);
 
@@ -110,9 +109,7 @@ function Edit() {
         <>
             <Head title="แก้ไขโปรไฟล์" />
             <Link to='/userprofile' className='back-btn'>ย้อนกลับ</Link>
-
             <main>
-
                 <form action="" onSubmit={handleSubmit}>
                     <div className='file-input' onClick={handleImgClick}>
                         {user.pfp ? (<img src={URL.createObjectURL(user.pfp)} alt=''/>):(<img src={Pic} alt=''/>)}
@@ -139,7 +136,7 @@ function Edit() {
                                 <input id="lname" type="text" value={user.lname} onChange={handleChange} name="lname" />
                             </label>
                             <label for="address">ที่อยู่สำหรับจัดส่ง
-                                <input id="address" type="text" value={user.address} onChange={handleChange} name="address" />
+                                <textarea rows={4} cols={40} id="address" type="text" value={user.address} onChange={handleChange} name="address" />
                             </label>
                             <label for="conf_pw">ยืนยันรหัสผ่าน
                                 <input id="conf_pw" type="text" value={user.conf_pw} onChange={handleChange} name="conf_pw" />
@@ -151,10 +148,8 @@ function Edit() {
                         <button id="cancel" class="button" onClick={handleClick}>ยกเลิก</button>
                         <button id="submit" class="button" type="submit" name="submit">ยืนยัน</button>
                     </div>
-
-                    </form>
-
-                </main>
+                </form>
+            </main>
         </>
     )
 
