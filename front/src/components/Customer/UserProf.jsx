@@ -31,34 +31,34 @@ function UserProf() {
     return (
         <>
             
-                <div className="profile-container" key={profile.id}>
-                    <Head title={profile.username} />
-                    <Link to='/user/home' className='back-btn'>ย้อนกลับ</Link>
-                    <h1>โปรไฟล์</h1>
-                    {profile.pfp ? (<img src={profile.pfp} alt="User Pfp" />):(<img src={Pic} alt="User Pfp" />)}
-                    <h2>{profile.username}</h2>
-                    <h3>{profile.fname} {profile.lname}</h3>
-                    <div className='user-contact'>
-                        <div className='tel-email'>
-                            <label>อีเมล
-                                <p>{profile.email}</p>
-                            </label>
-                            <label>เบอร์โทรศัพท์
-                                <p>{profile.tel}</p>
-                            </label>
-                        </div>
-                        <div className='address'>
-                            <label>ที่อยู่สำหรับจัดส่ง
-                                <p>{profile.address}</p>
-                            </label>
-                        </div>
+            <div className="profile-container" key={profile.id}>
+                <Head title={profile.username} />
+                <Link to='/user/home' className='back-btn'>ย้อนกลับ</Link>
+                <h1>โปรไฟล์</h1>
+                {profile.pfp ? (<img src={profile.pfp} alt="User Pfp" />):(<img src={Pic} alt="User Pfp" />)}
+                <h2>{profile.username}</h2>
+                <h3>{profile.fname} {profile.lname}</h3>
+                <div className='user-contact'>
+                    <div className='tel-email'>
+                        <label>อีเมล
+                            <p>{profile.email}</p>
+                        </label>
+                        <label>เบอร์โทรศัพท์
+                            <p>{profile.tel}</p>
+                        </label>
                     </div>
-                    <div className='button'>
-                        <Link to='/login' className="logout-btn" role="button" onClick={handleLogout}>ออกจากระบบ</Link>
-                        <Link to='/userprofile/edit' className="edit-btn" role="button">แก้ไขโปรไฟล์</Link>
+                    <div className='address'>
+                        <label>ที่อยู่สำหรับจัดส่ง
+                            <p>{profile.address}</p>
+                        </label>
                     </div>
-                        
                 </div>
+                <div className='button'>
+                    <Link to='/login' className="logout-btn" role="button" onClick={handleLogout}>ออกจากระบบ</Link>
+                    <Link to='/userprofile/edit' className="edit-btn" role="button">แก้ไขโปรไฟล์</Link>
+                </div>
+                        
+            </div>
         </>
     )
 }
