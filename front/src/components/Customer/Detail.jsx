@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import io from 'socket.io-client';
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Head from '../Head';
 import Nav from './Nav';
+import ImageGallery from "react-image-gallery";
+import 'react-image-gallery/styles/css/image-gallery.css'
+
 
 function Details() {
     const [price, setPrice] = useState('');
     const [socket, setSocket] = useState(null);
-    const navigate = useNavigate();
 
     axios.defaults.withCredentials = true;
 
@@ -74,8 +76,11 @@ function Details() {
             <Nav />
             <main>
                 <div className="GoodsInfo" key={goodsInfo.goodsID}>
-                    <div className='img'>
-                        {/* <img src={goodsInfo.pic}/> */}
+                    <div className='goods-img'>
+                        <ImageGallery items={goodsInfo.goodsLink} 
+                            showPlayButton = {false}
+                            showFullscreenButton = {true}
+                            showIndex = {true} />
                     </div>
                     <div className="text">
                         <h2>{goodsInfo.goodsName}</h2>
