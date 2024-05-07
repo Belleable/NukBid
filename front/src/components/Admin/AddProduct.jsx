@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import AdminNav from './AdminNav';
 import Head from '../Head';
 import axios from 'axios';
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ImageUploading from 'react-images-uploading';
 
 
@@ -61,7 +61,7 @@ function Add() {
     const handleClick = () => {
         navigate(-1)
     }
-    
+
     return (
         <>
         <Head title="เพิ่มสินค้า" />
@@ -91,7 +91,7 @@ function Add() {
                     onClick={onImageUpload}
                     {...dragProps}
                     >   
-                    Click or Drop here
+                    คลิกเพื่อเพิ่มภาพสินค้าไม่เกิน 5 ภาพ
                     </button>
                     &nbsp;
                     <button onClick={onImageRemoveAll}>Remove all images</button>
