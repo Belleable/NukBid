@@ -31,7 +31,6 @@ function UserProf() {
 
     return (
         <>
-            
             <div className="profile-container" key={profile.id}>
                 <Head title={profile.username} />
                 <Link to='/user/home' className='back-btn'>ย้อนกลับ</Link>
@@ -57,8 +56,7 @@ function UserProf() {
                 <div className='button'>
                     <Link to='/login' className="logout-btn" role="button" onClick={handleLogout}>ออกจากระบบ</Link>
                     <Link to='/userprofile/edit' className="edit-btn" role="button">แก้ไขโปรไฟล์</Link>
-                </div>
-                        
+                </div>    
             </div>
         </>
     )

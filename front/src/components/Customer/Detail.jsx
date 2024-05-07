@@ -77,7 +77,7 @@ function Details() {
             <main>
                 <div className="GoodsInfo" key={goodsInfo.goodsID}>
                     <div className='goods-img'>
-                        <ImageGallery items={goodsInfo.goodsLink} 
+                        <ImageGallery items={goodsInfo.picLink} 
                             showPlayButton = {false}
                             showFullscreenButton = {true}
                             showIndex = {true} />
