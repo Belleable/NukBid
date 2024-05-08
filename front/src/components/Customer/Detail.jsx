@@ -16,13 +16,15 @@ function Details() {
 
     const {goodsID} = useParams();
     const [goodsInfo, setGoodsInfo] = useState([]);
+    const [picture, setPicture] = useState()
     
     useEffect(() => {
         const fetchGoodsInfo = async () => {
             try {
-                const response = await axios.get(`http://localhost:3380/detail/${goodsID}`);
-                
-                setGoodsInfo(response.data[0]);
+                const response = await axios.get(`http://localhost:3380/detail/${goodsID}`);                
+                setGoodsInfo(response.data.data[0]);
+                setPicture(response.data.picture[0])
+                //setFormData({ ...formData, data: response.data.data, picture: response.data.picture });
             } catch (error) {
                 console.error('Error fetching goods data:', error);
             }
@@ -39,6 +41,7 @@ function Details() {
 
     }, []);
     console.log(goodsInfo)
+    console.log(picture)
 
     useEffect(() => {
         if (socket) {

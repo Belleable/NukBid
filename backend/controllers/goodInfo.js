@@ -70,7 +70,8 @@ export const goodInfo = async (req, res) => {
         ]);
         
         const formattedPictures = pictures.map(item => item.picLink);
-        
+        //good_info[0].picture = formattedPictures
+        //console.log(good_info)
         res.json({success: true, data: good_info, picture: formattedPictures})
         
     } catch (error) {
