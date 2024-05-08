@@ -14,6 +14,7 @@ import Register from './components/Customer/Register.jsx';
 import Sold from './components/Admin/Sold.jsx';
 import Edit from './components/Customer/EditProfile.jsx';
 import UserProf from './components/Customer/UserProf.jsx';
+import Details from './components/Customer/Detail.jsx';
 
 const router = createBrowserRouter([
   {
@@ -59,7 +60,10 @@ const router = createBrowserRouter([
   {
     path: "/user/profile",
     element:  <UserProf />
-  },
+  },{
+    path: "/detail/:goodsID",
+    element: <Details />
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

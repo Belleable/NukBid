@@ -58,7 +58,7 @@ function Details() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const res = await axios.put('http://localhost:3380/user/products/:goodsid', price)
+        const res = await axios.put('http://localhost:3380/user/products/:goodsID', price)
         if ( res.data.success === true ) {
               socket.emit('newMessage', { message: "Price has Already change", goodsID: goodsID, price: price });
         } else {
@@ -72,7 +72,7 @@ function Details() {
 
     return (
         <>
-            <Head title = {goodsInfo.goodsName} />
+            {/*<Head title = {goodsInfo.goodsName} />
             <Nav />
             <main>
                 <div className="GoodsInfo" key={goodsInfo.goodsID}>
@@ -110,7 +110,7 @@ function Details() {
                         </form>
                     </div>
                 </div>
-            </main>
+    </main>*/}
         </>
     )
 }

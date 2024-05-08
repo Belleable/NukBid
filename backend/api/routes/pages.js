@@ -70,6 +70,7 @@ router.put('/user/profile/edit',uploadprofile.single('picture'), editprofile)//
 router.get('/myproducts', userWin)
 router.post('/search', userHomeSearch)
 router.get('/bidding', userBidding)
+router.get('/detail/:goodsID', goodInfo)
 
 /* Alreary success */
 //goodInfo, VerifyAdmin and User, Login(อย่าลืมแก้เข้ารหัสคืนด้วย), Signup, Logout, 
