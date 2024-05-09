@@ -55,13 +55,13 @@ export const userBidding = async (req, res) => {
                           endTime: 1,
                           image: {
                               contentType: "$firstImage.contentType",
-                              // data: "$firstImage.data"
+                              data: "$firstImage.data"
                           }
                       }
                   }
               ]);
               console.log(goods_bidding)
-            res.json({ data: goods_bidding });
+            res.json({success: true, data: goods_bidding });
       } catch (error) {
             res.status(500).json({ message: "", error: error.message });
       }

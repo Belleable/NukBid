@@ -55,7 +55,7 @@ function UserProf() {
                 </div>
                 <div className='button'>
                     <Link to='/login' className="logout-btn" role="button" onClick={handleLogout}>ออกจากระบบ</Link>
-                    <Link to='/userprofile/edit' className="edit-btn" role="button">แก้ไขโปรไฟล์</Link>
+                    <Link to='/user/profile/edit' className="edit-btn" role="button">แก้ไขโปรไฟล์</Link>
                 </div>    
             </div>
         </>

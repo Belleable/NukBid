@@ -12,7 +12,7 @@ function Products() {
     useEffect(() => {
         const fetchMyProducts = async () => {
             try {
-                const res = await axios.get('http://localhost:3380/myproducts')
+                const res = await axios.get('http://localhost:3380/user/products/win')
                 if (res.data.success === true) {
                     setProducts(res.data.data)
                 }

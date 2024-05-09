@@ -40,8 +40,6 @@ function Details() {
         };
 
     }, []);
-    console.log(goodsInfo)
-    console.log(picture)
 
     useEffect(() => {
         if (socket) {
@@ -72,18 +70,20 @@ function Details() {
     const handleClick = (e) => {
         setPrice('');
     }
+    console.log(picture)
 
     return (
         <>
-            {/*<Head title = {goodsInfo.goodsName} />
+            <Head title = {goodsInfo.goodsName} />
             <Nav />
             <main>
                 <div className="GoodsInfo" key={goodsInfo.goodsID}>
                     <div className='goods-img'>
-                        <ImageGallery items={goodsInfo.picLink} 
+                        <ImageGallery items={picture} 
                             showPlayButton = {false}
                             showFullscreenButton = {true}
-                            showIndex = {true} />
+                            showIndex = {true} 
+                        />
                     </div>
                     <div className="text">
                         <h2>{goodsInfo.goodsName}</h2>
@@ -113,7 +113,10 @@ function Details() {
                         </form>
                     </div>
                 </div>
-    </main>*/}
+    </main>
+    {/*picture.map((pic)=>(
+        <img src={`http://localhost:3380/${pic.original}`} alt="" />
+    ))*/}
         </>
     )
 }

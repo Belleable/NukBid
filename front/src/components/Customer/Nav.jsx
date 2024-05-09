@@ -13,7 +13,7 @@ function Nav() {
         const fetchPfp = async () => {
             try {
                 const res = await axios.get("http://localhost:3380/usernav");
-                setPfp(res.data);
+                setPfp(res.data.data);
             } catch (err) {
                 console.log(err);
             }
@@ -26,9 +26,9 @@ function Nav() {
             <Link className='Logo' to='/'>Nuk-Bid</Link>
             <div>
                 <ul>
-                    <li><Link to='/' >หน้าหลัก</Link></li>
-                    <li><Link to='/bidding' >กำลังประมูล</Link></li>
-                    <li><Link to='/myproducts' >สินค้าที่ได้</Link></li>
+                    <li><Link to='/user/home' >หน้าหลัก</Link></li>
+                    <li><Link to='/user/products/bidding' >กำลังประมูล</Link></li>
+                    <li><Link to='/user/products/win' >สินค้าที่ได้</Link></li>
                 </ul>
             </div>
             <SearchBox />

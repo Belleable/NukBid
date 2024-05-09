@@ -101,11 +101,11 @@ function Edit() {
 
         try {
             const resEdit = await axios.put(`http://localhost:3380/user/profile/edit`, formData); 
-            if (resEdit.data.status === "success") {
-                alert(resEdit.data.success);
-                navigate(`/userprofile`);
+            if (resEdit.data.success === true) {
+                alert(resEdit.data.text);
+                navigate(`/user/profile`);
             } else {
-                alert(resEdit.data.error);
+                alert(resEdit.data.text);
             }
         } catch (error) {
             console.error(error);

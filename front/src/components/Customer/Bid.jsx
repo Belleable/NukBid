@@ -14,7 +14,7 @@ function Bid() {
         
         const fetchBidding = async () => {
             try {
-                const res = await axios.get('http://localhost:3380/bidding')
+                const res = await axios.get('http://localhost:3380/user/products/bidding')
                 if (res.data.success === true) {
                     setGoods(res.data.data)
                 } else {
@@ -26,13 +26,26 @@ function Bid() {
         }
         fetchBidding()
     }, []);
+
+    const handleDelete = async (goodsID) => {
+        console.log(goodsID)
+        try {
+            const res = await axios.delete(`http://localhost:3380/user/products/bidding?goodsid=${goodsID}`)
+            if (res.data.success === true) {
+                goods.splice(goods._id, goodsID)
+            }
+        } catch (error) {
+            console.log(error.text)
+        }
+    }
+
     console.log(goods)
     return (
         <>
             <Head title="กำลังประมูล" />
             <Nav />
             <h4 className='bid-text'>สินค้าที่ท่านกำลังประมูล</h4>
-            <Card goods={goods} isDeletable={true}/>
+            <Card goods={goods} isDeletable={true} handleDelete={handleDelete}/>
         </>
     );
 }
