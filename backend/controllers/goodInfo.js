@@ -60,10 +60,11 @@ export const goodInfo = async (req, res) => {
                             input: "$picLink",
                             as: "pic",
                             in: {
-                                original: { $concat: ["http://localhost:3380/", "$$pic.data", "/1000/600/"] },
-                                thumbnail: { $concat: ["http://localhost:3380/", "$$pic.data", "/250/150/"] }
+                                //original: { $concat: ["http://localhost:3380/", "$$pic.data", "/1000/600/"] },
+                                //thumbnail: { $concat: ["http://localhost:3380/", "$$pic.data", "/250/150/"] }
                                 //original: { $concat: ["$$pic.data"] },
-                                //thumbnail: { $concat: ["$$pic.data"] }
+                                //thumbnail: { $concat: ["$$pic.data"] },
+                                original: { $concat: ["http://localhost:3380/", "$$pic.data"] },
                             }
                         }
                     }

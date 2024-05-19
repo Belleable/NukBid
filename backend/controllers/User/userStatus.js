@@ -3,6 +3,7 @@ import Bidding from "../../api/models/Bidding.js"
 import jwt from "jsonwebtoken"
 import mongoose from "mongoose";
 
+//Success All
 export const userBidding = async (req, res) => {
       const usercookie = req.cookies.userLoggedIn;
       const userId = jwt.decode(usercookie, process.env.JWT_SECRET).id;
@@ -14,12 +15,16 @@ export const userBidding = async (req, res) => {
             select: "picLink"
       });*/
       console.log(bidding)
+      const now = new Date();
+    const nowWithZeroMilliseconds = new Date(now.setMilliseconds(0));
       try {
             const goods_bidding = await Goods.aggregate([
                   { 
                         $match: { 
                               _id: { $in: bidding }, 
-                              status: 'bidding' 
+                              endTime: {
+                                $gte: new Date(nowWithZeroMilliseconds)
+                            } 
                   } 
                   },
                   {
@@ -80,11 +85,13 @@ export const userWin = async (req, res) => {
       });//Check status name อีกที*/
 
       try {
+        const now = new Date();
+        const nowWithZeroMilliseconds = new Date(now.setMilliseconds(0));
             const goods_bidwin = await Goods.aggregate([
                   { 
                       $match: { 
                           topBuyer: objectId, 
-                          status: "bidding"
+                          endTime: { $lte: new Date(nowWithZeroMilliseconds) }
                       }
                   },
                   {

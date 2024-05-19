@@ -20,6 +20,7 @@ import { goodBidding } from "../../controllers/User/goodBidding.js";
 import { sendEmail } from "../../controllers/sendEmail.js";
 import { addPic } from "../../controllers/addPic.js";
 import { userBiddingDelete } from "../../controllers/User/userBiddingDelete.js";
+import { navbarPic } from "../../controllers/User/navbarPic.js";
 
 const router = express.Router();
 const storage = multer.diskStorage({
@@ -54,26 +55,27 @@ router.get('/logout', logout)//
 /* -----  Admin ----- */
 router.get('/admin/home', adminHome)//
 router.get('/admin/products/success', goodsSuccess)//
-router.post('/admin/home/addProduct', upload.array('image', 5), addProduct)//
-router.get('/admin/products/:goodsid', goodInfo)//
+router.post('/admin/home/addproduct', upload.array("images", 5), addProduct)//
+router.get('/admin/products/:goodsID', goodInfo)//
 
 /* ----- User ----- */
+router.get('/user/nav', navbarPic)
 router.get('/user/home', userHome)//
 router.post('/user/home', userHomeSearch)//
 router.get('/user/products/bidding', userBidding)//
 router.delete('/user/products/bidding', userBiddingDelete)//
 router.get('/user/products/win', userWin)//
-router.get('/user/products/:goodsid', goodInfo)//
-router.put('/user/products/:goodsid', goodBidding)
+router.get('/user/products/:goodsID', goodInfo)//
+router.put('/user/products/:goodsID', goodBidding)
 router.get('/user/profile', profile)// checkอีกที
-router.put('/user/profile/edit',uploadprofile.single('picture'), editprofile)//
+router.put('/user/profile/edit',upload.single('picture'), editprofile)//
 
 /* ---- Belle Path ---- */
 router.get('/myproducts', userWin)
 router.post('/search', userHomeSearch)
 router.get('/bidding', userBidding)
 router.get('/detail/:goodsID', goodInfo)
-router.get
+router.get('/user/results/:keyword', userHomeSearch)
 
 /* Alreary success */
 //goodInfo, VerifyAdmin and User, Login(อย่าลืมแก้เข้ารหัสคืนด้วย), Signup, Logout, 

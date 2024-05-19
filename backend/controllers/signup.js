@@ -1,4 +1,3 @@
-import { text } from "express";
 import Users from "../api/models/Users.js";
 import bcrypt from "bcrypt";
 

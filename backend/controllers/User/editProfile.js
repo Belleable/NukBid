@@ -5,14 +5,14 @@ export const editprofile = async (req, res) => {
       try {
         const usercookie = req.cookies.userLoggedIn;
         const id = (jwt.decode(usercookie, process.env.JWT_SECRET)).id;
-        const { picture, ...data } = req.body;
-
+        const { ...data } = req.body;
         const userpic = req.file
+        
         if (userpic === undefined) {
             const updateprofile = {$set: {...data}};
             await Users.findByIdAndUpdate(id, updateprofile)
         } else {
-            const updateprofile = {$set: {...data, picture: userpic}};
+            const updateprofile = {$set: {...data, picture: {contentType: userpic.mimetype, data: userpic.filename}}};
             await Users.findByIdAndUpdate(id, updateprofile)
         }
         //const binaryData = Buffer.from(userpic.dataUrl.split(',')[1], 'base64');

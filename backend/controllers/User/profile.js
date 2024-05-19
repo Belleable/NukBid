@@ -10,8 +10,10 @@ export const profile = async (req, res) => {
             //console.log(userprofile)
             //const userpic = Buffer.from(userprofile.picture).toString('base64')
             //const userpic = userprofile[0].picture.data.toString('base64')
-
-          res.json({data: userprofile /*picture: userpic*/});
+            //const picture = userprofile.picture
+            //console.log(userprofile)
+            console.log(userprofile)
+          res.json({data: userprofile});
       } catch (error) {
           console.error("Error fetching goods:", error);
           res.status(500).json({ success: false, text: "Failed to fetch goods", error: error.message });

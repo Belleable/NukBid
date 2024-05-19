@@ -1,5 +1,7 @@
 import Goods from "../../api/models/Goods.js";
 
+
+//Success
 export const goodsSuccess = async (req, res) => {
       /*const allGoods = await Goods.find({ status: "success" }).populate({
             path: "images",
@@ -8,11 +10,13 @@ export const goodsSuccess = async (req, res) => {
       });
       res.json(allGoods);*/
       try {
+        const now = new Date();
+        const nowWithZeroMilliseconds = new Date(now.setMilliseconds(0));
           
             const allGoods = await Goods.aggregate([
                 { 
                     $match: { 
-                        status: 'end'
+                        endTime: { $lte: new Date(nowWithZeroMilliseconds) }
                     }
                 },
                 {
@@ -57,7 +61,7 @@ export const goodsSuccess = async (req, res) => {
                 }
         ]);
           
-          res.json({data: allGoods});
+          res.json({success: true, data: allGoods});
     } catch (error) {
         console.error("Error fetching goods:", error);
         res.status(500).json({ success: false, text: "Failed to fetch goods" });

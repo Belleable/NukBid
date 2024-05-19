@@ -50,7 +50,7 @@ export const sendEmail = (product_link, bidder_email ) => {
                   attachments: [
                         {
                             filename: 'maomao.jpg',
-                            path: 'public/images/maomaoandherdog.jpg',
+                            path: 'public/image-1714926166723.jpg',
                             cid: 'maomao@nodemailer.com'
                         },
                   ],
@@ -59,8 +59,8 @@ export const sendEmail = (product_link, bidder_email ) => {
       
       transporter.sendMail(mailOptions(bidder_email), function (err, info) {
             if(err)
-              res.json({success: false, text: `send email not success bz. ${err.message}`})
+              console.log(`send email not success bz. ${err.message}`)
             else
-              res.json({success: true, text: "send email success"})
+                  console.log("send email success")
       });
 }
