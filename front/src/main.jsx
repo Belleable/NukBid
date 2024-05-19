@@ -8,7 +8,7 @@ import Bid from './components/Customer/Bid.jsx';
 import MyProduct from './components/Customer/Products.jsx';
 import Search from './components/Customer/Search.jsx';
 import AdminHome from './components/Admin/AdminHome.jsx';
-//import Add from './components/Admin/AddProduct.jsx';
+import Add from './components/Admin/AddProduct.jsx';
 import Login from './components/Customer/Login.jsx'
 import Register from './components/Customer/Register.jsx';
 import Sold from './components/Admin/Sold.jsx';
@@ -34,13 +34,13 @@ const router = createBrowserRouter([
     element:  <Search />
   },
   {
-    path: "/admin",
+    path: "/admin/home",
     element:  <AdminHome />
   },
-  {/*
-    path: "/add-product",
+  {
+    path: "/admin/home/addproduct",
     element:  <Add />
-*/},
+  },
   {
     path: "/login",
     element:  <Login />
@@ -50,7 +50,7 @@ const router = createBrowserRouter([
     element:  <Register />
   },
   {
-    path: "/sold",
+    path: "/admin/products/success",
     element:  <Sold />
   },
   {

@@ -6,6 +6,8 @@ import Pic from '../../images/pic.jpg';
 
 function UserProf() {
     const [profile, setProfile] = useState([]);
+    const [picture, setPicture] = useState(null)
+    //const b64 = new Buffer(profile.picture.data).toString('base64')
 
     axios.defaults.withCredentials = true;
 
@@ -14,6 +16,8 @@ function UserProf() {
             try {
                 const res = await axios.get("http://localhost:3380/user/profile");
                 setProfile(res.data.data[0]);
+                //const blob = new Blob([res.data.data[0].picture], { type: res.headers['content-type'] });
+      
             } catch (err) {
                 console.log(err);
             }
@@ -27,7 +31,15 @@ function UserProf() {
             window.location.reload(true);
         })
     }
-    console.log(profile)
+
+    /*arrayBufferToBase64(buffer) {
+        var binary = '';
+        var bytes = [].slice.call(new Uint8Array(buffer));
+        bytes.forEach((b) => binary += String.fromCharCode(b));
+        return window.btoa(binary);
+    };*/
+
+    console.log("picture   "+ profile)
 
     return (
         <>
@@ -35,7 +47,11 @@ function UserProf() {
                 <Head title={profile.username} />
                 <Link to='/user/home' className='back-btn'>ย้อนกลับ</Link>
                 <h1>โปรไฟล์</h1>
-                {profile.pfp ? (<img src={profile.pfp} alt="User Pfp" />):(<img src={Pic} alt="User Pfp" />)}
+                { profile.picture ? 
+                    (<img src={`http://localhost:3380/${profile.picture.data}`} />)
+                    :
+                    (<img src={Pic} alt="User Pfp" />)
+                }
                 <h2>{profile.username}</h2>
                 <h3>{profile.fname} {profile.lname}</h3>
                 <div className='user-contact'>

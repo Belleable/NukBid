@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import AdminNav from './AdminNav';
 import Card from '../Card';
 import { Link } from "react-router-dom";
@@ -15,7 +15,7 @@ function AdminHome() {
         
         const fetch = async () => {
             try {
-                const res = await axios.get('http://localhost:3380/user/home')
+                const res = await axios.get('http://localhost:3380/admin/home')
                 if (res.data.success === true) {
                     setGoods(res.data.data)
                 } else {
@@ -27,7 +27,7 @@ function AdminHome() {
         }
         fetch()
     }, []);
-
+    console.log(goods)
     return (
         <>
         <Head title="หน้าหลัก"/>

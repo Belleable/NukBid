@@ -22,8 +22,9 @@ function Details() {
         const fetchGoodsInfo = async () => {
             try {
                 const response = await axios.get(`http://localhost:3380/detail/${goodsID}`);                
-                setGoodsInfo(response.data.data[0]);
                 setPicture(response.data.picture[0])
+                setGoodsInfo(response.data.data[0]);
+                
                 //setFormData({ ...formData, data: response.data.data, picture: response.data.picture });
             } catch (error) {
                 console.error('Error fetching goods data:', error);
@@ -39,14 +40,14 @@ function Details() {
             newSocket.close();
         };
 
-    }, []);
+    }, [goodsInfo.maxPrice]);
 
     useEffect(() => {
         if (socket) {
             socket.emit('joinProductRoom', goodsID);
 
-            socket.on('newMessageNotification', (message) => {
-                  setPrice(message.price)
+            socket.on('newPrice', (price) => {
+                  setGoodsInfo({maxPrice: price})
               });
         }
     }, [socket]);
@@ -55,12 +56,13 @@ function Details() {
         setPrice(e.target.value)
     }
 
-    console.log("socket:  " + socket)
+    console.log("socket:  " + goodsInfo)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const res = await axios.put('http://localhost:3380/user/products/:goodsID', price)
+        const res = await axios.put(`http://localhost:3380/user/products/${goodsID}`, {price: price})
         if ( res.data.success === true ) {
+            setGoodsInfo({...goodsInfo, maxPrice: price})
               socket.emit('newMessage', { message: "Price has Already change", goodsID: goodsID, price: price });
         } else {
               alert(res.data.text)
@@ -75,15 +77,16 @@ function Details() {
     return (
         <>
             <Head title = {goodsInfo.goodsName} />
-            <Nav />
+            {/*<Nav />*/}
             <main>
                 <div className="GoodsInfo" key={goodsInfo.goodsID}>
                     <div className='goods-img'>
-                        <ImageGallery items={picture} 
+                        {/*<ImageGallery items={picture} 
                             showPlayButton = {false}
                             showFullscreenButton = {true}
                             showIndex = {true} 
-                        />
+    />*/}
+                    
                     </div>
                     <div className="text">
                         <h2>{goodsInfo.goodsName}</h2>
@@ -96,8 +99,8 @@ function Details() {
                             <tr>
                                 <th>ผู้เสนอราคาสูงสุด</th>
                                 <td>
-                                    <span id="topBuyer">{goodsInfo.topBuyer}</span>
-                                    <span id="maxPrice">{price}</span>
+                                    <span id="topBuyer">{goodsInfo.topBuyer_username}</span>
+                                    <span id="maxPrice">{goodsInfo.maxPrice}</span>
                                 </td>
                             </tr>
                         </table>

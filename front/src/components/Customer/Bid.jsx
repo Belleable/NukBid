@@ -33,6 +33,8 @@ function Bid() {
             const res = await axios.delete(`http://localhost:3380/user/products/bidding?goodsid=${goodsID}`)
             if (res.data.success === true) {
                 goods.splice(goods._id, goodsID)
+            } else {
+                alert(res.data.text)
             }
         } catch (error) {
             console.log(error.text)

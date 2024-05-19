@@ -28,7 +28,7 @@ function Home() {
         fetch()
     }, []);
 
-    console.log(goods)
+    console.log("from home:  " + goods)
     
     return (
         <>

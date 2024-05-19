@@ -131,6 +131,7 @@ function Edit() {
                 <form action="" onSubmit={handleSubmit}>
                     <div className='file-input' onClick={handleImgClick}>
                         {user.picture  ? (<img src={URL.createObjectURL(user.picture)} alt=''/>):(<img src={Pic} alt=''/>)}
+                        
                         <input type='file' onChange={handleChange} ref={inputRef} name='picture' />
                     </div>
 

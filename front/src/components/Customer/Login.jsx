@@ -24,7 +24,7 @@ function Login() {
                 username: formData.username,
                 password: formData.password,
             });
-            if (response.data.success = true) {
+            if (response.data.success === true) {
                 alert(response.data.success);
                 if (response.data.isAdmin){
                     navigate('/admin')

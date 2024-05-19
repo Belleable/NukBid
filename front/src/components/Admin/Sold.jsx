@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import AdminNav from './AdminNav';
 import Card from '../Card';
 import Head from '../Head';
+import axios from 'axios'
 
 function Sold() {
     const [auth, setAuth] = useState(false);
@@ -13,7 +14,7 @@ function Sold() {
         
         const fetchSold = async () => {
             try {
-                const res = await axios.get('http://localhost:3380/user/home')
+                const res = await axios.get('http://localhost:3380/admin/products/success')
                 if (res.data.success === true) {
                     setGoods(res.data.data)
                 } else {
