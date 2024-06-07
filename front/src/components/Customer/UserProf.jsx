@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Link } from "react-router-dom";
 import Head from '../Head';
 import Pic from '../../images/pic.jpg';
+import Alert from '../Alert';
+import toast from 'react-hot-toast';
 
 function UserProf() {
     const [profile, setProfile] = useState([]);
@@ -16,8 +18,6 @@ function UserProf() {
             try {
                 const res = await axios.get("http://localhost:3380/user/profile");
                 setProfile(res.data.data[0]);
-                //const blob = new Blob([res.data.data[0].picture], { type: res.headers['content-type'] });
-      
             } catch (err) {
                 console.log(err);
             }
@@ -26,25 +26,18 @@ function UserProf() {
     }, []);
 
     const handleLogout = async () => {
-        axios.get('http://localhost:3380/logout')
-        .then(res => {
+        const logout = await axios.get('http://localhost:3380/logout');
+        if (logout.data.success === true) {
+            toast.success(logout.data.text)
             window.location.reload(true);
-        })
+        }
     }
-
-    /*arrayBufferToBase64(buffer) {
-        var binary = '';
-        var bytes = [].slice.call(new Uint8Array(buffer));
-        bytes.forEach((b) => binary += String.fromCharCode(b));
-        return window.btoa(binary);
-    };*/
-
-    console.log("picture   "+ profile)
 
     return (
         <>
             <div className="profile-container" key={profile.id}>
                 <Head title={profile.username} />
+                <Alert />
                 <Link to='/user/home' className='back-btn'>ย้อนกลับ</Link>
                 <h1>โปรไฟล์</h1>
                 { profile.picture ? 

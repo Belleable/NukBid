@@ -4,12 +4,14 @@ import io from 'socket.io-client';
 import { useParams } from "react-router-dom";
 import Head from '../Head';
 import Nav from './Nav';
-import ImageGallery from "react-image-gallery";
 import 'react-image-gallery/styles/css/image-gallery.css'
-
+import Pic from '../../images/pic.jpg'
+import toast from 'react-hot-toast';
+import Alert from '../Alert';
+import Timer from '../Timer';
 
 function Details() {
-    const [price, setPrice] = useState('');
+    const [price, setPrice] = useState(0);
     const [socket, setSocket] = useState(null);
 
     axios.defaults.withCredentials = true;
@@ -47,8 +49,16 @@ function Details() {
             socket.emit('joinProductRoom', goodsID);
 
             socket.on('newPrice', (price) => {
-                  setGoodsInfo({maxPrice: price})
-              });
+                setGoodsInfo({maxPrice: price})
+                toast.error('ราคามีการเปลี่ยนแปลงแล้ว', {
+                    icon: '🛎️',
+                    style: {
+                        color: '#F4D03F',
+                        background: '#FCF3CF',
+                        border: '2px solid #F4D03F'
+                    }
+                })
+            });
         }
     }, [socket]);
 
@@ -56,57 +66,73 @@ function Details() {
         setPrice(e.target.value)
     }
 
-    console.log("socket:  " + goodsInfo)
+    console.log(goodsInfo)
 
     const handleSubmit = async (e) => {
+        const currentdate = new Date();
         e.preventDefault();
-        const res = await axios.put(`http://localhost:3380/user/products/${goodsID}`, {price: price})
+
+        if (price <= parseInt(goodsInfo.maxPrice)) {
+            return toast.error("กรุณาเสนอราคาให้มากกว่าราคาปัจจุบัน")
+        } else if ((price - parseInt(goodsInfo.maxPrice) < parseInt(goodsInfo.leastAdd))) {
+            return toast.error("กรุณาเสนอราคาเพิ่มอย่างน้อยครั้งละ " + goodsInfo.leastAdd + " บาท")
+        }
+
+        const res = await axios.put(`http://localhost:3380/user/products/${goodsID}`, {price: price, datetime_new: new Date(), datetime_old: goodsInfo.endTime})
         if ( res.data.success === true ) {
+            toast.success(res.data.text)
             setGoodsInfo({...goodsInfo, maxPrice: price})
-              socket.emit('newMessage', { message: "Price has Already change", goodsID: goodsID, price: price });
+              socket.emit('newMessage', { goodsID: goodsID, price: price });
         } else {
               alert(res.data.text)
         }
     };
 
     const handleClick = (e) => {
-        setPrice('');
+        e.preventDefault()
+        setPrice(goodsInfo.maxPrice);
     }
     console.log(picture)
 
     return (
         <>
-            <Head title = {goodsInfo.goodsName} />
+            <Head title = 'NukBid' />
             {/*<Nav />*/}
+            <Alert />
             <main>
-                <div className="GoodsInfo" key={goodsInfo.goodsID}>
+                <div className="GoodsInfo" key={goodsInfo._id}>
                     <div className='goods-img'>
-                        {/*<ImageGallery items={picture} 
-                            showPlayButton = {false}
-                            showFullscreenButton = {true}
-                            showIndex = {true} 
-    />*/}
-                    
                     </div>
                     <div className="text">
-                        <h2>{goodsInfo.goodsName}</h2>
+                        <h2>{goodsInfo.goodName}</h2>
                         <p>{goodsInfo.properties}</p>
                         <table>
                             <tr>
                                 <th>เวลาที่เหลือ</th>
-                                <td id="timeleft">{goodsInfo.time}</td>
+                                <td id="timeleft"><Timer endTime = {goodsInfo.endTime}/></td>
                             </tr>
                             <tr>
                                 <th>ผู้เสนอราคาสูงสุด</th>
-                                <td>
-                                    <span id="topBuyer">{goodsInfo.topBuyer_username}</span>
-                                    <span id="maxPrice">{goodsInfo.maxPrice}</span>
-                                </td>
+                                {goodsInfo.topBuyer_username === undefined ? 
+                                    <td>
+                                        <span> ยังไม่มีผู้ประมูลสินค้าชิ้นนี้ </span>
+                                    </td>
+                                    :
+                                    <td>
+                                        {goodsInfo.topBuyer_picture  ?
+                                            <img src={`http://localhost:3380/${goodsInfo.topBuyer_picture.data}`} alt="Profile pic"  style={{'width': '200px'}} />
+                                            :
+                                            <img src={Pic} alt=''/>
+                                        }
+                                        <span id="topBuyer">{goodsInfo.topBuyer_username}</span>
+                                        <span id="maxPrice">{goodsInfo.maxPrice}</span>
+                                    </td>
+                                }
                             </tr>
                         </table>
                         <form onSubmit={ handleSubmit }>
                             <label> เสนอราคา
-                                <input value={price} onChange={ handleChange } />
+                                <input value={price !== 0 ?  price : goodsInfo.maxPrice} onChange={ handleChange } type='number' step={goodsInfo.leastAdd}/>
                             </label>
                             <p>เพิ่มได้ทีละไม่ต่ำกว่า {goodsInfo.leastAdd} บาท</p>
                             <div className='submit-cancel'>

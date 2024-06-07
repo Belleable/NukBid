@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import Head from '../Head';
+import Alert from '../Alert';
+import toast from 'react-hot-toast';
 
 function Register() {
     const navigate = useNavigate()
@@ -24,7 +26,7 @@ function Register() {
         e.preventDefault();
 
         if (formData.password !== formData.conf_pw) {
-            alert('Password and confirm password do not match. Please try again.');
+            toast.error('กรุณาใส่รหัสผ่านให้ตรงกัน')
             return;
         }
 
@@ -33,19 +35,16 @@ function Register() {
             const response = await axios.post('http://localhost:3380/register', formData)
 
             if(response.data.success === false){
-                alert(response.data.text)
+                toast.error(response.data.text)
             }
             else{
-                alert(response.data.text)
+                toast.success(response.data.text)
                 navigate('/login')
             }
             
         } catch (error) {
-            // Handle registration error
             console.error('Registration error:', error);
-
-            // Show an alert or update the UI with an error message
-            alert('Registration failed. Please try again.');
+            toast.error('การลงทะเบียนผิดพลาด')
         }
 
         // Reset the form after submission
@@ -61,11 +60,10 @@ function Register() {
         });
     };
 
-    console.log(formData);
-
     return (
         <div className="Register container">
             <Head title="สมัครใช้งาน NukBid"/>
+            <Alert />
             <h3>Registration</h3>
             <form action="#" onSubmit={handleSubmit}>
                 <div className="user-details">

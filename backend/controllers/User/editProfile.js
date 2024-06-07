@@ -5,23 +5,65 @@ export const editprofile = async (req, res) => {
       try {
         const usercookie = req.cookies.userLoggedIn;
         const id = (jwt.decode(usercookie, process.env.JWT_SECRET)).id;
-        const { ...data } = req.body;
+        const { 
+            fname,
+            lname,
+            email,
+            tel,
+            password,
+            address
+            } = req.body;
         const userpic = req.file
-        
-        if (userpic === undefined) {
-            const updateprofile = {$set: {...data}};
-            await Users.findByIdAndUpdate(id, updateprofile)
+
+        var updateprofile;
+
+        if (userpic === undefined || password === '') {
+            if (password !== '') {
+                updateprofile = {$set: { 
+                    password: password,
+                    fname: fname,
+                    lname: lname,
+                    email: email,
+                    tel: tel,
+                    address: address
+                }}
+            } else if (userpic !== undefined) {
+                updateprofile = {$set: { 
+                    picture: {contentType: userpic.mimetype, data: userpic.filename},
+                    fname: fname,
+                    lname: lname,
+                    email: email,
+                    tel: tel,
+                    address: address
+                }}
+            } else {
+                updateprofile = {$set: { 
+                    fname: fname,
+                    lname: lname,
+                    email: email,
+                    tel: tel,
+                    address: address
+                }}
+            }
         } else {
-            const updateprofile = {$set: {...data, picture: {contentType: userpic.mimetype, data: userpic.filename}}};
-            await Users.findByIdAndUpdate(id, updateprofile)
+            const salt = bcrypt.genSaltSync(parseInt(process.env.GEN_SALT));
+            const hash = bcrypt.hashSync(password, salt);
+            updateprofile = {$set: { 
+                password: hash,
+                picture: {contentType: userpic.mimetype, data: userpic.filename},
+                fname: fname,
+                lname: lname,
+                email: email,
+                tel: tel,
+                address: address
+            }}
         }
-        //const binaryData = Buffer.from(userpic.dataUrl.split(',')[1], 'base64');
-        /*const updateprofile = {$set: {...req.body, picture: userpic}};
-        await Users.findByIdAndUpdate(id, updateprofile)*/
+        console.log(updateprofile)
+        await Users.findByIdAndUpdate(id, updateprofile)
             
-          res.json({success: true, text: "Edit your profile successfully"})
+          res.json({success: true, text: "แก้ไขข้อมูลเรียบร้อยแล้ว"})
       } catch (error) {
           console.error("Error fetching goods:", error);
-          res.json({ success: false, text: "Failed to fetch goods", error: error.message });
+          res.json({ success: false, text: "มีข้อผิดพลาดเกิดขึ้น", error: error.message });
       }
 };

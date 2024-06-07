@@ -33,7 +33,7 @@ function AdminHome() {
         <Head title="หน้าหลัก"/>
         <AdminNav />
         <h4 className='bid-text'>สินค้าที่กำลังเปิดประมูล</h4>
-        <Link to='/add-product' style={{ textDecoration: 'none' }}>เพิ่มสินค้า</Link>
+        <Link to='/admin/home' style={{ textDecoration: 'none' }}>เพิ่มสินค้า</Link>
         <Card goods={goods}/>
         </>
     );

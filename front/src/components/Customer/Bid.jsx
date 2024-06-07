@@ -3,6 +3,8 @@ import Nav from './Nav';
 import Card from '../Card';
 import axios from 'axios';
 import Head from '../Head';
+import toast from 'react-hot-toast';
+import Alert from '../Alert';
 
 function Bid() {
     const [auth, setAuth] = useState(false);
@@ -32,9 +34,11 @@ function Bid() {
         try {
             const res = await axios.delete(`http://localhost:3380/user/products/bidding?goodsid=${goodsID}`)
             if (res.data.success === true) {
+                toast.success(res.data.text)
                 goods.splice(goods._id, goodsID)
+                setGoods(prevGood => prevGood.filter(good => good._id !== goodsID));
             } else {
-                alert(res.data.text)
+                toast.error(res.data.text)
             }
         } catch (error) {
             console.log(error.text)
@@ -46,6 +50,7 @@ function Bid() {
         <>
             <Head title="กำลังประมูล" />
             <Nav />
+            <Alert />
             <h4 className='bid-text'>สินค้าที่ท่านกำลังประมูล</h4>
             <Card goods={goods} isDeletable={true} handleDelete={handleDelete}/>
         </>

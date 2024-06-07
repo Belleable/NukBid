@@ -48,7 +48,38 @@ nav li {
   border-radius: 40px;
   position: absolute;
   right: 120px;
+
+  /* Aut */
+  background: linear-gradient(#fff, #fff) padding-box,
+  linear-gradient(45deg, slateblue, coral) border-box;
+  border: 3px solid transparent;
+  border-radius: 50px;
 }
+
+/* Aut */
+.search-box-results {
+  z-index: 1; /* Ensures it's above other elements */
+  overflow-y: scroll;
+  position: absolute; /* Position it absolutely within the relative .search-box */
+  top: 50px; /* Position below the .search-box */
+  width: 100%; /* Make the width equal to the parent */
+  background: linear-gradient(#fff, #fff) padding-box,
+  linear-gradient(45deg, slateblue, coral) border-box;
+  border: 3px solid transparent;
+  border-radius: 20px;
+  max-height: 100px; 
+  display: flex;
+  flex-direction: column;
+  padding: 1vw;
+}
+
+.search-box-results > span:hover{
+  background-color: #ac8ecb89;
+}
+.search-box-results > span:active{
+  background-color:#ab8ecb;
+}
+/*  */
 
 .search-input {
   background: #fff;

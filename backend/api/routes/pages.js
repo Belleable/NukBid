@@ -14,11 +14,9 @@ import { profile } from "../../controllers/User/profile.js";
 import { goodInfo } from "../../controllers/goodInfo.js";
 import { goodsSuccess } from "../../controllers/Admin/adminStatus.js";
 import { editprofile } from "../../controllers/User/editProfile.js";
-import { userHomeSearch } from "../../controllers/User/userHomeSearch.js";
+import { userHomeSearch, userHomeSearchGoodName } from "../../controllers/User/userHomeSearch.js";
 import { adminHome } from "../../controllers/Admin/adminHome.js";
 import { goodBidding } from "../../controllers/User/goodBidding.js";
-import { sendEmail } from "../../controllers/sendEmail.js";
-import { addPic } from "../../controllers/addPic.js";
 import { userBiddingDelete } from "../../controllers/User/userBiddingDelete.js";
 import { navbarPic } from "../../controllers/User/navbarPic.js";
 
@@ -29,20 +27,18 @@ const storage = multer.diskStorage({
       },
       filename: (req, file, cb) => {
             cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
-            //Date.now() + path.extname(file.originalname)
       }
 })
 
 //const upload = multer()
 const upload = multer({storage: storage})
-const uploadprofile = multer({storage: multer.memoryStorage()})
 
 /////////////// Test
-router.post('/sendtext', sendEmail)
-router.get('/testlive/:id', (req, res) => {
-      res.json("hello")
-})
-router.post('/addpic', upload.array('image', 5), addPic)
+// router.post('/sendtext', sendEmail)
+// router.get('/testlive/:id', (req, res) => {
+//       res.json("hello")
+// })
+// router.post('/addpic', upload.array('image', 5), addPic)
 
 ////////////////////////////// Real
 router.post('/admin', VerifyAdmin)
@@ -51,6 +47,8 @@ router.post('/user', VerifyUser)
 router.post('/register', signup)//
 router.post('/login', login)//
 router.get('/logout', logout)//
+router.get('/navbarpic', navbarPic)//ดึงรูปมาโชว์ Navbar
+
 
 /* -----  Admin ----- */
 router.get('/admin/home', adminHome)//
@@ -59,23 +57,20 @@ router.post('/admin/home/addproduct', upload.array("images", 5), addProduct)//
 router.get('/admin/products/:goodsID', goodInfo)//
 
 /* ----- User ----- */
-router.get('/user/nav', navbarPic)
 router.get('/user/home', userHome)//
-router.post('/user/home', userHomeSearch)//
-router.get('/user/products/bidding', userBidding)//
-router.delete('/user/products/bidding', userBiddingDelete)//
-router.get('/user/products/win', userWin)//
+router.post('/findGoodName', userHomeSearchGoodName)//search ชื่อสินค้า
+router.get('/user/results/:keyword', userHomeSearch)//
+router.get('/user/products/bidding', userBidding)//สินค้าที่ประมูลอยู่
+router.delete('/user/products/bidding', userBiddingDelete)//เลิกประมูลสินค้าที่ประมูลอยู่
+router.get('/user/products/win', userWin)//ประมูลชนะแล้ว
 router.get('/user/products/:goodsID', goodInfo)//
-router.put('/user/products/:goodsID', goodBidding)
-router.get('/user/profile', profile)// checkอีกที
+router.put('/user/products/:goodsID', goodBidding)//ประมูลสินค้า
+router.get('/user/profile', profile)// 
 router.put('/user/profile/edit',upload.single('picture'), editprofile)//
 
 /* ---- Belle Path ---- */
 router.get('/myproducts', userWin)
-router.post('/search', userHomeSearch)
-router.get('/bidding', userBidding)
 router.get('/detail/:goodsID', goodInfo)
-router.get('/user/results/:keyword', userHomeSearch)
 
 /* Alreary success */
 //goodInfo, VerifyAdmin and User, Login(อย่าลืมแก้เข้ารหัสคืนด้วย), Signup, Logout, 

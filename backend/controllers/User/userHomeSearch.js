@@ -67,3 +67,19 @@ export const userHomeSearch = async (req, res) => {
             console.log(error)
       }
 }
+
+export const userHomeSearchGoodName = async (req, res) => {
+    const { keyword } = req.body
+
+
+    try {
+        const goodsName = await Goods.find(
+            { goodName: { $regex: new RegExp(keyword, 'i') } }, 
+            { _id: 1, goodName: 1 }
+        );
+            
+        res.json({success: true, data: goodsName})
+    } catch (error) {
+          console.log(error)
+    }
+}

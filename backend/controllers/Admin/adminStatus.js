@@ -3,12 +3,7 @@ import Goods from "../../api/models/Goods.js";
 
 //Success
 export const goodsSuccess = async (req, res) => {
-      /*const allGoods = await Goods.find({ status: "success" }).populate({
-            path: "images",
-            model: "Pics",
-            select: "picLink"
-      });
-      res.json(allGoods);*/
+      
       try {
         const now = new Date();
         const nowWithZeroMilliseconds = new Date(now.setMilliseconds(0));
@@ -55,7 +50,7 @@ export const goodsSuccess = async (req, res) => {
                         endTime: 1,
                         image: {
                             contentType: "$firstImage.contentType",
-                            // data: "$firstImage.data"
+                            data: "$firstImage.data"
                         }
                     }
                 }

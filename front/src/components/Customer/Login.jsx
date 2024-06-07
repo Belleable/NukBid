@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import Head from '../Head';
-//import Cookies from 'universal-cookie';
+import Alert from '../Alert';
+import toast from 'react-hot-toast';
 
 function Login() {
     const navigate = useNavigate()
@@ -25,25 +26,25 @@ function Login() {
                 password: formData.password,
             });
             if (response.data.success === true) {
-                alert(response.data.success);
+                toast.success(response.data.text)
                 if (response.data.isAdmin){
-                    navigate('/admin')
+                    navigate('/admin/home')
                 } else {navigate('/user/home');}
             }
             else {
-                console.log('Login failed. Error:', response.data.error);
-                alert('Incorrect username or password. Please try again.');
+                toast.error(response.data.text)
+                console.log('Login failed. Error:', response.data.text);
             }
         } catch (error) {
             console.error('Authentication error:', error);
-            alert('Authentication failed. Please try again.');
+            toast.error(response.data.text)
         }
-        setFormData({ username: '', password: '' });
     };
-    console.log(formData)
+    
     return (
         <div className="Login">
             <Head title="เข้าสู่ระบบ NukBid"/>
+            <Alert />
             <h1>Log in</h1>
             <form action="/login" method="post" onSubmit={handleSubmit}>
                 <label htmlFor="username">Username
@@ -62,7 +63,7 @@ function Login() {
                     required="" 
                     id="pw" 
                     name="password" 
-                    value={formData.pw}
+                    value={formData.password}
                     onChange={handleChange} />
                 </label>
                             

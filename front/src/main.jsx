@@ -17,57 +17,92 @@ import UserProf from './components/Customer/UserProf.jsx';
 import Details from './components/Customer/Detail.jsx';
 
 const router = createBrowserRouter([
-  {
-    path: "/user/home",
-    element:  <Home />
-  },
-  {
-    path: "/user/products/bidding",
-    element:  <Bid />
-  },
-  {
-    path: "/user/products/win",
-    element:  <MyProduct />
-  },
-  {
-    path: "/user/results/:keyword",
-    element:  <Search />
-  },
-  {
-    path: "/admin/home",
-    element:  <AdminHome />
-  },
-  {
-    path: "/admin/home/addproduct",
-    element:  <Add />
-  },
-  {
-    path: "/login",
-    element:  <Login />
-  },
-  {
-    path: "/register",
-    element:  <Register />
-  },
-  {
-    path: "/admin/products/success",
-    element:  <Sold />
-  },
-  {
-    path: "/user/profile/edit",
-    element:  <Edit />
-  },
-  {
-    path: "/user/profile",
-    element:  <UserProf />
-  },{
-    path: "/detail/:goodsID",
-    element: <Details />
-  }
+    {
+        path: "/login",
+        element:  <Login />
+    },
+    {
+        path: "/register",
+        element:  <Register />
+    },
+    {
+        path: "user",
+        children: [
+            {
+                path: "home",
+                element:  <Home />
+            },
+            {
+                path: "search/results/:keyword",
+                element:  <Search />
+            },
+            {
+                path: "status",
+                children: [
+                    {
+                        path: "win",
+                        element:  <MyProduct />
+                    },
+                    {
+                        path: "bidding",
+                        element: <Bid />
+                    }
+                ]
+            },
+            {
+                path: "profile",
+                children: [
+                    {
+                        path: "",
+                        element: <UserProf />
+                    },
+                    {
+                        path: "edit",
+                        element: <Edit />
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        path: "admin",
+        children: [
+            {
+                path: "home",
+                children: [
+                    {
+                        path: "",
+                        element:  <AdminHome />
+                    },
+                    {
+                        path: "addproduct",
+                        element:  <Add />
+                    }
+                ]
+            },
+            {
+                path: "search/results/:keyword",
+                element:  <Search />
+            },
+            {
+                path: "status",
+                children: [
+                    {
+                        path: "success",
+                        element:  <Sold />
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        path: "/detail/:goodsID",
+        element: <Details />
+    }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>,
+<React.StrictMode>
+<RouterProvider router={router} />
+</React.StrictMode>,
 )

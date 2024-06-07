@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Head from '../Head';
 import './AddProducts.css';
+import Alert from '../Alert';
+import toast from 'react-hot-toast';
 
 function Add() {
     const navigate = useNavigate();
@@ -27,10 +29,10 @@ function Add() {
         setGoodsInfo({ picLink: newPicLink });
     };
 
-    const handleOtherImgChange = (e) => {
-        const files = Array.from(e.target.files);
-        setGoodsInfo(prevState => ({ picLink: [...prevState.picLink, ...files] })); // Add the file objects
-    };
+    // const handleOtherImgChange = (e) => {
+    //     const files = Array.from(e.target.files);
+    //     setGoodsInfo(prevState => ({ picLink: [...prevState.picLink, ...files] })); // Add the file objects
+    // };
 
     const clickCancelImg = (picIndex) => {
         setGoodsInfo(prevState => ({
@@ -46,7 +48,7 @@ function Add() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData();
-        goodsInfo.picLink.forEach((file) => {
+            goodsInfo.picLink.forEach((file) => {
             formData.append('images', file); // Append image files
         });
 
@@ -66,13 +68,13 @@ function Add() {
                 },
             });
             if (res.data.success === false) {
-                alert(res.data.text);
+                toast.error(res.data.text)
             } else {
-                alert(res.data.text)
+                toast.success(res.data.text)
                 navigate(-1)
             }
         } catch (err) {
-            alert("An error occurred while uploading the images. Please try again.");
+            toast.error('เพิ่มสินค้าไม่สำเร็จ')
         }
     };
 
@@ -80,11 +82,10 @@ function Add() {
         navigate(-1);
     };
 
-    console.log(goodsInfo)
-
     return (
         <>
             <Head title="เพิ่มสินค้า" />
+            <Alert />
             <form onSubmit={handleSubmit}>
                 <div className="addgoods-img">
                     <div className="goods-coverimg">

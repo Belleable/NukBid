@@ -6,6 +6,6 @@ export const navbarPic = async (req, res) => {
       const id = (jwt.decode(usercookie, process.env.JWT_SECRET)).id;
       const userprofile = await Users.find({ _id: id})
 
-      console.log(userprofile[0].picture)
-      res.json({data: userprofile[0].picture})
+      // console.log(userprofile[0].picture)
+      res.json({success: true, data: userprofile[0].picture})
 }

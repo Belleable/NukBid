@@ -41,12 +41,12 @@ const io = new Server(httpServer, {
 io.on("connection", (socket) => {
       console.log('user connected')
       socket.on('joinProductRoom', (goodsID) => {
-            console.log("join room" + goodsID)
+            // console.log("join room" + goodsID)
             socket.join(goodsID); 
       });
 
       socket.on('newMessage', (message) => {
-            console.log('New message received in backend:', message, message.goodsID);
+            // console.log('New message received in backend:', message, message.goodsID);
             socket.to(message.goodsID).emit('newPrice', message.price);
       });
 

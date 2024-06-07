@@ -18,7 +18,7 @@ export const userBiddingDelete = async (req, res) => {
                   res.json({success: false, text: "ลบไม่ได้ เนื่องจากขณะนี้คุณเป็นผู้ประมูลสูงสุด"})
             } else {
                   await Bidding.deleteOne({ $and: [{goodsID: goodsId}, {userID: userId}]})
-                  res.json({success: true})
+                  res.json({success: true, text: 'ยกเลิกการประมูลสินค้าชิ้นนี้แล้ว'})
             }
       } catch (error) {
             console.log(error.message)

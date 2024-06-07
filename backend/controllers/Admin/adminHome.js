@@ -60,6 +60,6 @@ export const adminHome = async (req, res) => {
           res.json({success: true, data: allGoods});
     } catch (error) {
         console.error("Error fetching goods:", error);
-        res.status(500).json({ success: false, text: "Failed to fetch goods" });
+        res.status(500).json({ success: false, text: "มีข้อผิดพลาดเกิดขึ้น" });
     }
 };

@@ -22,6 +22,7 @@ export const goodInfo = async (req, res) => {
             {
                 $project: {
                     _id: 1,
+                    goodName: 1,
                     maxPrice: 1,
                     endTime: 1,
                     leastAdd: 1,
@@ -40,6 +41,7 @@ export const goodInfo = async (req, res) => {
             {
                 $group: {
                     _id: "$_id",
+                    goodName: {  $first: "$goodName" },
                     maxPrice: { $first: "$maxPrice" },
                     endTime: { $first: "$endTime" },
                     leastAdd: { $first: "$leastAdd" },
@@ -73,8 +75,7 @@ export const goodInfo = async (req, res) => {
         ]);
         
         const formattedPictures = pictures.map(item => item.picLink);
-        //good_info[0].picture = formattedPictures
-        //console.log(good_info)
+        console.log(good_info)
         res.json({success: true, data: good_info, picture: formattedPictures})
         
     } catch (error) {

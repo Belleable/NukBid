@@ -5,7 +5,7 @@ export const VerifyLoggedIn = async (req, res, next) => {
       const { user } = req.cookies
 
       if (!user) {
-            return res.json({text: "You need to login"})
+            return res.json({success: false, text: "กรุณาลงชื่อเข้าใช้งาน"})
       }
       next()
 }
@@ -15,7 +15,7 @@ export const VerifyAdmin = async (req, res, next) => {
       const isAdmin = (jwt.decode(usercookie, process.env.JWT_SECRET)).isAdmin;
       
       if ( !isAdmin ) {
-            res.json({success: false, text: "You connot access to Admin pages"})
+            res.json({success: false, text: "คุณไม่มีสิทธิ์เข้าถึงหน้านี้"})
       }
       next()
 }
@@ -25,7 +25,7 @@ export const VerifyUser = async (req, res, next) => {
       const isAdmin = (jwt.decode(usercookie, process.env.JWT_SECRET)).isAdmin;
       
       if ( isAdmin ) {
-            res.json({success: false, text: "You connot access to User pages"})
+            res.json({success: false, text: "คุณไม่มีสิทธิ์เข้าถึงหน้านี้"})
       }
       next()
 }

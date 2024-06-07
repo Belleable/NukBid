@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Link, useNavigate } from "react-router-dom";
 import Pic from '../../images/pic.jpg';
 import Head from '../Head';
+import Alert from '../Alert';
+import toast from 'react-hot-toast';
 
 function Edit() {
     const inputRef = useRef(null);
@@ -70,7 +72,6 @@ function Edit() {
                 setUser(prevUser => ({
                     ...prevUser,
                     ...response.data.data[0],
-                    picture: response.data.data[0].picture === null ? null : prevUser.picture, 
                     password: ''
                 }));
                 //setUser(response.data.data[0])
@@ -81,12 +82,11 @@ function Edit() {
         fetchUserData();
     }, []);
 
-    console.log(user)
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (user.password !== user.conf_pw) {
-            alert('Password and confirm password do not match. Please try again.');
+            toast.error('รหัสผ่านไม่ตรงกัน')
             return;
         }
 
@@ -102,10 +102,10 @@ function Edit() {
         try {
             const resEdit = await axios.put(`http://localhost:3380/user/profile/edit`, formData); 
             if (resEdit.data.success === true) {
-                alert(resEdit.data.text);
+                toast.success(resEdit.data.text)
                 navigate(`/user/profile`);
             } else {
-                alert(resEdit.data.text);
+                toast.error(resEdit.data.text)
             }
         } catch (error) {
             console.error(error);
@@ -130,35 +130,42 @@ function Edit() {
             <main>
                 <form action="" onSubmit={handleSubmit}>
                     <div className='file-input' onClick={handleImgClick}>
-                        {user.picture  ? (<img src={URL.createObjectURL(user.picture)} alt=''/>):(<img src={Pic} alt=''/>)}
+                        {user.picture  ? 
+                            typeof user.picture.data === 'string' ?
+                                <img src={`http://localhost:3380/${user.picture.data}`} alt="Profile pic"  style={{'width': '200px'}} />
+                                :
+                                <img src={URL.createObjectURL(user.picture)} alt=''/>
+                            :
+                            <img src={Pic} alt=''/>
+                        }
                         
                         <input type='file' onChange={handleChange} ref={inputRef} name='picture' />
                     </div>
 
                     <div className="text-input">
                         <div className='left-input'>
-                            <label for="fname">ชื่อจริง
+                            <label htmlFor="fname">ชื่อจริง
                                 <input id="fname" type="text" value={user.fname} onChange={handleChange} name="fname" />
                             </label>
-                            <label for="email">อีเมล
+                            <label htmlFor="email">อีเมล
                                 <input id="email" type="text" value={user.email} onChange={handleChange} name="email" />
                             </label>
-                            <label for="tel">เบอร์โทรศัพท์
+                            <label htmlFor="tel">เบอร์โทรศัพท์
                                 <input id="tel" type="text" value={user.tel} onChange={handleChange} name="tel" />
                             </label>
-                            <label for="password">รหัสผ่านใหม่
-                                <input id="password" type="text" value={user.password} onChange={handleChange} name="password" />
+                            <label htmlFor="password">รหัสผ่านใหม่
+                                <input id="password" type="password" value={user.password} onChange={handleChange} name="password" />
                             </label>
                         </div>
                         <div className='right-input'>
-                            <label for="lname">นามสกุล
+                            <label htmlFor="lname">นามสกุล
                                 <input id="lname" type="text" value={user.lname} onChange={handleChange} name="lname" />
                             </label>
-                            <label for="address">ที่อยู่สำหรับจัดส่ง
+                            <label htmlFor="address">ที่อยู่สำหรับจัดส่ง
                                 <textarea rows={4} cols={40} id="address" type="text" value={user.address} onChange={handleChange} name="address" />
                             </label>
-                            <label for="conf_pw">ยืนยันรหัสผ่าน
-                                <input id="conf_pw" type="text" value={user.conf_pw} onChange={handleChange} name="conf_pw" />
+                            <label htmlFor="conf_pw">ยืนยันรหัสผ่าน
+                                <input id="conf_pw" type="password" value={user.conf_pw} onChange={handleChange} name="conf_pw" />
                             </label>
                         </div>        
                     </div>

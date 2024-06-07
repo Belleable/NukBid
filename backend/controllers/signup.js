@@ -6,10 +6,6 @@ export const signup = async (req, res) => {
       if (!username || !password || !fname || !lname || !email || !tel || !address ) {
             res.json({success: false, text: "Please enter all your information"})
       }
-
-      console.log("From backend " + req.body )
-
-      //const findUsers = await Users.find({$or: [{username: "owachiii"}, {email: "samon"}]});
       const findUser = await Users.findOne({ $or: [ {email: email}, {username: username} ] });
       if (findUser) {
             /*if ( findEmail && findEmail) {
@@ -21,7 +17,7 @@ export const signup = async (req, res) => {
             else {
                   res.json({text: "This email has been sign up"})
             }*/
-            res.json({success: false, text: "This username or email has been sign up."})
+            res.json({success: false, text: "ชื่อบัญชีนี้มีผู้ใช้งานแล้ว", error: "account"})
       }
 
       const salt = bcrypt.genSaltSync(parseInt(process.env.GEN_SALT));
@@ -31,8 +27,8 @@ export const signup = async (req, res) => {
       try {
             await Users.insertMany(newUser);
       } catch (error) {
-            res.json({success: false, text: "Sign up isn't success"})
+            res.json({success: false, text: "ลงทะเบียนไม่สำเร็จ กรุณาลองใหม่อีกครั้ง"})
       }
-      res.json({success: true, text: "Sign up success"})
+      res.json({success: true, text: "ลงทะเบียนเรียบร้อยแล้ว"})
 
 }

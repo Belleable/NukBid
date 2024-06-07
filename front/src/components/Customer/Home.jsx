@@ -18,7 +18,6 @@ function Home() {
                 if (res.data.success === false) {
                     setAuth(false)
                 } else {
-                
                     setGoods(res.data.data)
                 }
             } catch (error) {
@@ -27,8 +26,6 @@ function Home() {
         }
         fetch()
     }, []);
-
-    console.log("from home:  " + goods)
     
     return (
         <>

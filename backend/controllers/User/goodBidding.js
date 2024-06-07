@@ -9,51 +9,64 @@ import mongoose from "mongoose";
 
 //Success
 export const goodBidding = async (req, res) => {
-      const { price } = req.body;
-      const { goodsID } = req.params;
-      const usercookie = req.cookies.userLoggedIn;
-      const userId = jwt.decode(usercookie, process.env.JWT_SECRET).id;
-      const goodsId = new mongoose.Types.ObjectId(goodsID);
-      const objectId = new mongoose.Types.ObjectId(userId);
-  
-      try {
-          const allUser_bidding = await Bidding.aggregate([
-              {
-                  $match: {
-                      goodsID: goodsId
-                  }
-              },
-              {
-                  $lookup: {
-                      from: "users",
-                      localField: "userID",
-                      foreignField: "_id",
-                      as: "user"
-                  }
-              },
-              {
-                  $unwind: "$user"
-              },
-              {
-                  $project: {
-                      userID: "$userID",
-                      email: "$user.email" // Assuming email is stored in the 'email' field of the 'user' document
-                  }
-              }
-          ]);
-  
-          console.log(allUser_bidding);
-            //Check ว่าชนกับคนอื่นมั้ย กับ ทำแจ้งเตือน
-            const hasBid = allUser_bidding.some(bid => bid.userID.equals(objectId));
-            if (hasBid === false) {
-                  await Bidding.insertMany({ userID: objectId, goodsID: goodsId })
+    const { price, datetime_new, datetime_old } = req.body;
+    const { goodsID } = req.params;
+    const usercookie = req.cookies.userLoggedIn;
+    const userId = jwt.decode(usercookie, process.env.JWT_SECRET).id;
+    const goodsId = new mongoose.Types.ObjectId(goodsID);
+    const objectId = new mongoose.Types.ObjectId(userId);
+
+    const datetimeNew = new Date(datetime_new);
+    const datetimeOld = new Date(datetime_old);
+
+    const timeDifference = datetimeOld - datetimeNew;
+
+    const timeDifferenceInMinutes = timeDifference / 1000 / 60;
+
+    try {
+        const allUser_bidding = await Bidding.aggregate([
+            {
+                $match: {
+                    goodsID: goodsId
+                }
+            },
+            {
+                $lookup: {
+                    from: "users",
+                    localField: "userID",
+                    foreignField: "_id",
+                    as: "user"
+                }
+            },
+            {
+                $unwind: "$user"
+            },
+            {
+                $project: {
+                    userID: "$userID",
+                    email: "$user.email"
+                }
             }
-            
+        ]);
+
+        //Check ว่าชนกับคนอื่นมั้ย
+        const hasBid = allUser_bidding.some(bid => bid.userID.equals(objectId));
+        if (hasBid === false) {
+                await Bidding.insertMany({ userID: objectId, goodsID: goodsId })
+        }
+        //Check ว่าประมูลเข้ามาตอน 5 นาทีสุดท้ายมั้ย แล้วเพิ่มเวลาอีก10นาที
+        if (timeDifferenceInMinutes <= 5 && timeDifferenceInMinutes >= 0) {
+            const newEndTime = new Date(datetimeOld);
+            newEndTime.setMinutes(newEndTime.getMinutes() + 10);
+            console.log(`New end time: ${newEndTime}`);
+            await Goods.findOneAndUpdate({ _id: goodsId }, { topBuyer: objectId, maxPrice: price, endTime: newEndTime })
+        } else {
             await Goods.findOneAndUpdate({ _id: goodsId }, { topBuyer: objectId, maxPrice: price })
-            sendEmail('link_product', allUser_bidding.map(user => user.email))
-            res.json({success: true, text: "บิดล้ะ"})
-      } catch (error) {
-            console.log(error)
-            res.json({ success: false, text: "Failed to bid good", error: error.message });
-      }
+        }
+        sendEmail(`http://localhost:5173/detail/${goodsID}`, allUser_bidding.map(user => user.email))
+        res.json({success: true, text: "เสนอราคาแล้วเรียบร้อย"})
+    } catch (error) {
+        console.log(error)
+        res.json({ success: false, text: "เสนอราคาไม่สำเร็จ กรุณาลองใหม่อีกครั้ง", error: error.message });
+    }
 }

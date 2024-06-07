@@ -133,7 +133,6 @@ export const userWin = async (req, res) => {
                   }
               ]);
               
-              //console.log(goods_bidwin);
               
             res.json({success: true, data: goods_bidwin });
       } catch (error) {

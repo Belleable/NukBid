@@ -68,8 +68,7 @@ export const userHome = async (req, res) => {
                 }
             }
         ]);
-
-        console.log(allGoods);
+        
         res.json({ success: true, data: allGoods });
     } catch (error) {
         console.error("Error fetching goods:", error);
