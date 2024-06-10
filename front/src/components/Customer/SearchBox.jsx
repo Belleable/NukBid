@@ -62,7 +62,7 @@ function SearchBox() {
     };
     console.log(goodName);
     return (
-        <>
+        <div className='search-css'>
             <form className="search-box" onSubmit={handleSubmit}>
                 <input 
                     type="text" 
@@ -78,7 +78,7 @@ function SearchBox() {
                     <FontAwesomeIcon icon={faSearch} />
                 </button>
             </form>
-            {goodName.length > 0 &&
+            {/* {goodName.length > 0 &&
                 <div className="search-box-results">
                     {goodName.map((good, goodindex) => (
                         <span 
@@ -90,8 +90,8 @@ function SearchBox() {
                         </span>
                     ))}
                 </div>
-            }
-        </>
+            } */}
+        </div>
     );
 }
 

@@ -27,10 +27,15 @@ function Products() {
     },[])
     return (
         <>
-        <Head title="สินค้าของคุณ" />
-        <Nav />
-        <h4 className='bid-text'>สินค้าที่ประมูลได้</h4>
-        <Card goods={products}/>
+            <Head title="สินค้าของคุณ" />
+            <Nav />
+            <>.</>
+            <main className='Products'>
+                <h4 className='bid-text'>สินค้าที่ประมูลได้</h4>
+                <div className='card-container'>
+                    <Card isTimeShow = {false} goods={products} role={'user'}/>
+                </div>
+            </main>
         </>
     );
 }

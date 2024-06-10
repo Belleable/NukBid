@@ -2,9 +2,13 @@ import React, { useRef, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Head from '../Head';
-import './AddProducts.css';
+import './css/AddProduct.css';
 import Alert from '../Alert';
 import toast from 'react-hot-toast';
+import Pic from '../../images/uploadimg.jpg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import AdminNav from './AdminNav.jsx'
 
 function Add() {
     const navigate = useNavigate();
@@ -29,10 +33,10 @@ function Add() {
         setGoodsInfo({ picLink: newPicLink });
     };
 
-    // const handleOtherImgChange = (e) => {
-    //     const files = Array.from(e.target.files);
-    //     setGoodsInfo(prevState => ({ picLink: [...prevState.picLink, ...files] })); // Add the file objects
-    // };
+    const handleOtherImgChange = (e) => {
+        const files = Array.from(e.target.files);
+        setGoodsInfo(prevState => ({ picLink: [...prevState.picLink, ...files] })); // Add the file objects
+    };
 
     const clickCancelImg = (picIndex) => {
         setGoodsInfo(prevState => ({
@@ -48,7 +52,7 @@ function Add() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData();
-            goodsInfo.picLink.forEach((file) => {
+        goodsInfo.picLink.forEach((file) => {
             formData.append('images', file); // Append image files
         });
 
@@ -59,6 +63,7 @@ function Add() {
         formData.append('leastAdd', goodsInfo.leastAdd);
         formData.append('date', goodsInfo.date);
         formData.append('selecttime', goodsInfo.selecttime)
+
 
         try {
             const res = await axios.post("http://localhost:3380/admin/home/addproduct", formData, {
@@ -82,54 +87,56 @@ function Add() {
         navigate(-1);
     };
 
+    console.log(goodsInfo);
     return (
         <>
             <Head title="เพิ่มสินค้า" />
-            <Alert />
-            <form onSubmit={handleSubmit}>
+            <AdminNav />
+            <Alert/>
+            <>.</>
+            <form className='add-form' onSubmit={handleSubmit}>
                 <div className="addgoods-img">
-                    <div className="goods-coverimg">
-                        <figure>
-                            <label>
-                                Image Cover
-                                {goodsInfo.picLink.length > 0 ? (
-                                    <img 
-                                        src={URL.createObjectURL(goodsInfo.picLink[0])} 
-                                        className="picture pic-0" 
-                                        style={{ width: '60vw' }} 
-                                    />
-                                ) : (
-                                    <img src={'/vite.svg'} className="picture pic-0" />
-                                )}
-                                <input 
-                                    name="images" 
-                                    type="file" 
-                                    ref={coverRef} 
-                                    onChange={(e) => handleImgAutChange(e, 0)} 
-                                    hidden 
+                    <figure className='cover-img'>
+                        <label>
+                            ภาพหน้าปกสินค้า
+                            {goodsInfo.picLink.length > 0 ? (
+                                <img 
+                                    src={URL.createObjectURL(goodsInfo.picLink[0])} 
+                                    className="picture pic-0" 
                                 />
-                            </label>
-                        </figure>
-                        <figure>
-                            <label>
-                                Other Images
-                                <input 
-                                    name="images" 
-                                    type="file" 
-                                    multiple 
-                                    ref={otherRefs} 
-                                    onChange={handleOtherImgChange} 
-                                />
-                            </label>
-                        </figure>
-                        <div className="picture-addon">
-                            {goodsInfo.picLink.slice(1).map((file, picIndex) => (
-                                <figure key={picIndex + 1}>
-                                    <img src={URL.createObjectURL(file)} style={{ width: '30vw', height: '30vw'}} />
-                                    <span onClick={() => clickCancelImg(picIndex + 1)}>Cancel</span>
-                                </figure>
-                            ))}
-                        </div>
+                            ) : (
+                                <img src={Pic} className="picture pic-0" />
+                            )}
+                            <input 
+                                name="images" 
+                                type="file" 
+                                ref={coverRef} 
+                                onChange={(e) => handleImgAutChange(e, 0)} 
+                                hidden 
+                            />
+                        </label>
+                    </figure>
+                    <figure className='more-img'>
+                        <label>
+                            ภาพสินค้าเพิ่มเติม
+                            <input 
+                                name="images" 
+                                type="file" 
+                                multiple 
+                                ref={otherRefs} 
+                                onChange={handleOtherImgChange} 
+                            />
+                        </label>
+                    </figure>
+                    <div className="picture-addon">
+                        {goodsInfo.picLink.slice(1).map((file, picIndex) => (
+                            <figure key={picIndex + 1}>
+                                <img src={URL.createObjectURL(file)} />
+                                <FontAwesomeIcon className='cancel-img' 
+                                icon={faXmark} 
+                                onClick={() => clickCancelImg(picIndex + 1)} />
+                            </figure>
+                        ))}
                     </div>
                 </div>
                 <div className='addgoods-text'>
@@ -149,10 +156,10 @@ function Add() {
                     <label>รายละเอียดเพิ่มเติม
                         <textarea rows={10} cols={80} type='text' value={goodsInfo.properties} onChange={handleChange} name="properties" />
                     </label>
+                    <div className="CancelAndSubmit">
+                        <button className="cancel-btn" type='reset' onClick={handleClick}>ยกเลิก</button>
+                        <button className='submit-btn' type="submit" name="submit">เพิ่มสินค้า</button>
                 </div>
-                <div className="CancelAndSubmit">
-                    <button className="cancel-btn" onClick={handleClick}>ยกเลิก</button>
-                    <button className='submit-btn' type="submit" name="submit">เพิ่มสินค้า</button>
                 </div>
             </form>
         </>

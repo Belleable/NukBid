@@ -51,8 +51,13 @@ function Bid() {
             <Head title="กำลังประมูล" />
             <Nav />
             <Alert />
-            <h4 className='bid-text'>สินค้าที่ท่านกำลังประมูล</h4>
-            <Card goods={goods} isDeletable={true} handleDelete={handleDelete}/>
+            <main className='bid'>
+                <>-</>
+                <h4 className='bid-text'>สินค้าที่ท่านกำลังประมูล</h4>
+                <div className='card-container'>
+                    <Card goods={goods} isDeletable={true} handleDelete={handleDelete} role={'user'}/>
+                </div>
+            </main>
         </>
     );
 }

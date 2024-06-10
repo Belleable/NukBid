@@ -29,10 +29,13 @@ function Sold() {
 
     return (
         <>
-        <Head title="ปิดประมูลแล้ว" />
-        <AdminNav />
-        <h4 className='bid-text'>สินค้าที่ปิดประมูลแล้ว</h4>
-        <Card goods={goods}/>
+            <Head title="ปิดประมูลแล้ว" />
+            <AdminNav />
+            <>.</>
+            <h4 className='bid-text'>สินค้าที่ปิดประมูลแล้ว</h4>
+            <div className='card-container'>
+                <Card goods={goods} role={'admin'}/>
+            </div>
         </>
     );
 }

@@ -3,7 +3,7 @@ import Countdown from 'react-countdown';
 
 function Timer({endTime}) {
     const end = new Date(endTime)
-    const Completionist = () => <></>;
+    const Completionist = () => <span style={{color: 'red'}} >หมดเวลา</span>;
 
     const renderer = ({ days, hours, minutes, seconds, completed }) => {
         if (completed) {

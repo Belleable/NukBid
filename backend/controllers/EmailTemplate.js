@@ -24,22 +24,43 @@ export const sendEmail = (product_link, bidder_email ) => {
                                     <meta charset="UTF-8">
                                     <title> Notification From "NukBid" </title>
                                     <style>
-                                          h1 {
-                                                color: blue;
-                                          }
-                                          .mail {
-                                                display: flex;
-                                                align-items: center;
-                                                flex-direction: column;
-                                                justify-content: center;
-                                          }
-                                          img{
-                                                border-radius: 30px;
-                                          }
-                                    </style>
+                                    body {
+                                      font-family: Arial, sans-serif;
+                                    }
+                                    .container {
+                                      width: 100%;
+                                      max-width: 600px;
+                                      margin: 0 auto;
+                                      padding: 20px;
+                                      text-align: center;
+                                      border: 1px solid #e0e0e0;
+                                      border-radius: 10px;
+                                      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                                    }
+                                    h1 {
+                                      color: blue;
+                                    }
+                                    p {
+                                      margin: 20px 0;
+                                    }
+                                    .button {
+                                      display: inline-block;
+                                      padding: 10px 20px;
+                                      font-size: 16px;
+                                      color: white;
+                                      background-color: blue;
+                                      text-decoration: none;
+                                      border-radius: 5px;
+                                    }
+                                    img {
+                                      border-radius: 10px;
+                                      width: 150px;
+                                      margin-top: 20px;
+                                    }
+                                  </style>
                               </head>
                               <body>
-                                    <div class="mail">
+                                    <div class="container">
                                           <h1> สินค้าของคุณมีผู้เสนอราคาแข่งแหละ! </h1>
                                           <p> ถ้าาหากไม่อยากถูกแย่งไปล่ะก็ รีบเสนอราคาแข่งสิ <a href=${product_link}>กดเลย!</a> <p>
                                           <img src="cid:maomao@nodemailer.com"/>
@@ -49,8 +70,8 @@ export const sendEmail = (product_link, bidder_email ) => {
                   `,
                   attachments: [
                         {
-                            filename: 'maomao.jpg',
-                            path: 'public/image-1714926166723.jpg',
+                            filename: 'logonukbid.jpg',
+                            path: 'public/logonukbid.png',
                             cid: 'maomao@nodemailer.com'
                         },
                   ],

@@ -1,0 +1,158 @@
+.EditProfile {
+    margin: 0 0;
+    padding: 0 0;
+}
+
+.EditProfile h1 {
+    margin-top: -28vh;
+    text-align: center;
+    color: #495C9D;
+    font-weight: 700;
+    font-size: 36px;
+}
+
+.back-btn-bg {
+    background: linear-gradient(to right, #D3ECCD 0%, #C8B7DC 100%);
+    width: 100%;
+    margin-right: 0;
+    display: block;
+    height: 35vh;
+    z-index: -1;
+}
+
+.file-input img {
+    width: 35vh;
+    height: 35vh;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #C8B6DE;
+    margin-left: 50%;
+    margin-right: -50%;
+    transform: translateX(-50%);
+}
+
+.file-input {
+    align-content: center;
+}
+
+.text-input {
+    display: grid;
+    margin-top: 20px;
+    margin-left: 50%;
+    margin-right: -50%;
+    transform: translateX(-50%);
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    width: 80%;
+    gap: 10%;
+}
+
+.text-input .fname-box {
+    grid-row: 1;
+    grid-column: 1;
+}
+
+.text-input .email-box {
+    grid-row: 2;
+    grid-column: 1;
+}
+
+.text-input .tel-box {
+    grid-row: 3;
+    grid-column: 1;
+}
+
+.text-input .pw-box {
+    grid-row: 4;
+    grid-column: 1;
+}
+
+.text-input .lname-box {
+    grid-row: 1;
+    grid-column: 2;
+}
+
+.text-input .address-box {
+    grid-row: 2 /span 2;
+    grid-column: 2;
+}
+
+.text-input .conf-box {
+    grid-row: 4;
+    grid-column: 2;
+}
+
+.text-input label {
+    display: flex;
+    flex-direction: column;
+    color: #C9B7DE;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.text-input>div {
+    border: 2.5px solid #C9B7DE;
+    border-radius: 20px;
+    padding: 8px;
+}
+
+.text-input input,
+.text-input textarea {
+    border: 0;
+    outline: none;
+    font-size: 16px;
+}
+
+.EditProfile .CancelAndSubmit {
+    margin-top: 100px;
+    padding-bottom: 100px;
+    text-align: center;
+    position: relative;
+    width: 100vw;
+    margin-left: -50vw;
+    left: 50%;
+}
+
+.EditProfile .cancel-btn,
+.EditProfile .submit-btn {
+    border-radius: 21px;
+    border: 2px solid #C8B7DC;
+    padding: 5px 45px;
+    display: inline;
+    font-size: 18px;
+    margin: 10px;
+    text-decoration: none;
+    color: #C8B7DC;
+    background-color: #fff;
+}
+
+.EditProfile .submit-btn {
+    background-color: #C8B7DC;
+    color: #fff;
+}
+
+.EditProfile .cancel-btn:active,
+.EditProfile .submit-btn:active {
+    background-color: #D3ECCD;
+    border: 2px solid #D3ECCD;
+    color: #fff;
+}
+
+@media screen and (max-width: 600px) {
+    .text-input {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .file-input img {
+        width: 25vh;
+        height: 25vh;
+    }
+    .EditProfile h1 {
+        font-size: 30px;
+        margin-top: -20vh;
+    }
+    .back-btn-bg {
+        height: 25vh;
+    }
+}

@@ -3,6 +3,8 @@ import axios from 'axios';
 import Nav from './Nav';
 import Card from '../Card';
 import Head from '../Head';
+import Banner from '../../images/Banner.png'
+import './css/Home.css'
 
 function Home() {
     const [auth, setAuth] = useState(false);
@@ -31,9 +33,13 @@ function Home() {
         <>
             <Head title="หน้าหลัก" />
             <Nav />
-            {/* แทรกรูปแบนเนอร์ */}
-            <h4 className='bid-text'>สินค้าที่กำลังเปิดประมูล</h4>
-            <Card goods={goods} />
+            <main className='Home'>
+                <img src={Banner} className='banner'/>
+                <h4 className='bid-text'>สินค้าที่กำลังเปิดประมูล</h4>
+                <div className='card-home'>
+                    <Card goods={goods} role={'user'}/>
+                </div>
+            </main>
         </>
     );
 }

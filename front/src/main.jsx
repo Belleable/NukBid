@@ -15,8 +15,19 @@ import Sold from './components/Admin/Sold.jsx';
 import Edit from './components/Customer/EditProfile.jsx';
 import UserProf from './components/Customer/UserProf.jsx';
 import Details from './components/Customer/Detail.jsx';
+import AuthRoute from './Auth/AuthRoute.jsx';
+import ProtectedRoute from './Auth/ProtectedRoute.jsx';
+import WinnerProfile from './components/Admin/WinnerProfile.jsx';
 
 const router = createBrowserRouter([
+    {
+        path: '',
+        element: <AuthRoute><div>Loading...</div></AuthRoute>
+    },
+    {
+        path: '/',
+        element: <AuthRoute><div>Loading...</div></AuthRoute>
+    },
     {
         path: "/login",
         element:  <Login />
@@ -26,78 +37,101 @@ const router = createBrowserRouter([
         element:  <Register />
     },
     {
-        path: "user",
+        element: <ProtectedRoute isAdmin={false}/>,
         children: [
             {
-                path: "home",
-                element:  <Home />
-            },
-            {
-                path: "search/results/:keyword",
-                element:  <Search />
-            },
-            {
-                path: "status",
+                path: "user",
                 children: [
                     {
-                        path: "win",
-                        element:  <MyProduct />
+                        path: "home",
+                        element:  <Home />
                     },
                     {
-                        path: "bidding",
-                        element: <Bid />
-                    }
-                ]
-            },
-            {
-                path: "profile",
-                children: [
-                    {
-                        path: "",
-                        element: <UserProf />
+                        path: "search/results/:keyword",
+                        element:  <Search />
                     },
                     {
-                        path: "edit",
-                        element: <Edit />
+                        path: "status",
+                        children: [
+                            {
+                                path: "win",
+                                element:  <MyProduct />
+                            },
+                            {
+                                path: "bidding",
+                                element: <Bid />
+                            }
+                        ]
+                    },
+                    {
+                        path: "profile",
+                        children: [
+                            {
+                                path: "",
+                                element: <UserProf />
+                            },
+                            {
+                                path: "edit",
+                                element: <Edit />
+                            }
+                        ]
+                    },
+                    {
+                        path: "detail/:goodsID",
+                        element: <Details />
                     }
                 ]
             }
         ]
     },
     {
-        path: "admin",
+        element: <ProtectedRoute isAdmin={true}/>,
         children: [
             {
-                path: "home",
+                path: "admin",
                 children: [
                     {
-                        path: "",
-                        element:  <AdminHome />
+                        path: "home",
+                        children: [
+                            {
+                                path: "",
+                                element:  <AdminHome />
+                            },
+                            {
+                                path: "addproduct",
+                                element:  <Add />
+                            }
+                        ]
                     },
                     {
-                        path: "addproduct",
-                        element:  <Add />
-                    }
-                ]
-            },
-            {
-                path: "search/results/:keyword",
-                element:  <Search />
-            },
-            {
-                path: "status",
-                children: [
+                        path: "search/results/:keyword",
+                        element:  <Search />
+                    },
                     {
-                        path: "success",
-                        element:  <Sold />
+                        path: "status",
+                        children: [
+                            {
+                                path: "success",
+                                element:  <Sold />
+                            }
+                        ]
+                    },
+                    {
+                        path: "detail/:goodsID",
+                        children: [
+                            {
+                                path: "",
+                                element: <Details />
+                            },
+                            {
+                                path: "userprofile/:username",
+                                element: <WinnerProfile />
+                            }
+                        ]
                     }
                 ]
             }
         ]
-    },
-    {
-        path: "/detail/:goodsID",
-        element: <Details />
     }
 ]);
 

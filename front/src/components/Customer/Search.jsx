@@ -4,6 +4,7 @@ import axios from 'axios';
 import Nav from './Nav';
 import Card from '../Card';
 import Head from '../Head';
+import './css/Search.css'
 
 function Search() {
     const [auth, setAuth] = useState(false);
@@ -28,14 +29,24 @@ function Search() {
             }
         }
         fetchAllResults()
-    }, []);
+    }, [keyword]);
 
     return (
         <>
         <Head title="ผลการค้นหา"/>
         <Nav />
-        <p>ผลหารค้นหาสำหรับ "{keyword}" : {results.length} รายการ</p> 
-        {results.length == 0 ? (<div className='no-match'>ขออภัย ไม่มีสินค้าที่ตรงกับคำค้นหาของคุณ</div>):(<Card goods = {results}/>)}
+        <main className='Search'>
+            <>.</>
+            <p>ผลหารค้นหาสำหรับ "{keyword}" : 4 รายการ</p>
+            {results ? 
+                <div className='card-container'>
+                    <Card goods = {results} role={'user'}/>
+                </div>
+                :
+                <div className='no-match'>ขออภัย ไม่มีสินค้าที่ตรงกับคำค้นหาของคุณ</div>
+            }
+        </main>
+        {/* {results.length == 0 ? (<div className='no-match'>ขออภัย ไม่มีสินค้าที่ตรงกับคำค้นหาของคุณ</div>):(<Card goods = {results}/>)} */}
         </>
     );
 }

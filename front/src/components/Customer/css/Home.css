@@ -1,0 +1,33 @@
+* {
+    font-family: "IBM Plex Sans Thai Looped", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.banner {
+    margin-top: 70px;
+    height: 300px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.Home .bid-text {
+    margin-left: 3vw;
+    margin-top: 1vw;
+    margin-bottom: 1vw;
+}
+
+.card-home {
+    justify-content: center; 
+    padding-bottom: 3vw;
+    position: relative;
+    display: grid;
+    grid-gap: 1.75vw;
+    grid-template-columns: repeat(auto-fill, 220px);
+}
+
+@media screen and (max-width: 400px) {
+    .banner {
+        height: 20vh;
+    }
+}

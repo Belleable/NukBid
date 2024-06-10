@@ -1,13 +1,11 @@
 import express from "express";
 import multer from "multer";
 import path from "path";
-import fs from "fs";
 
 import { signup } from "../../controllers/signup.js";
 import { login } from "../../controllers/login.js";
 import { logout } from "../../controllers/logout.js";
 import { userHome } from "../../controllers/User/userHome.js";
-import { VerifyAdmin, VerifyUser } from "../../controllers/verify.js";
 import { addProduct } from "../../controllers/Admin/addProduct.js";
 import { userBidding, userWin } from "../../controllers/User/userStatus.js";
 import { profile } from "../../controllers/User/profile.js";
@@ -19,6 +17,9 @@ import { adminHome } from "../../controllers/Admin/adminHome.js";
 import { goodBidding } from "../../controllers/User/goodBidding.js";
 import { userBiddingDelete } from "../../controllers/User/userBiddingDelete.js";
 import { navbarPic } from "../../controllers/User/navbarPic.js";
+import { restockProduct } from "../../controllers/Admin/restockProduct.js";
+import { checkAuth } from "../../controllers/checkAuth.js"; 
+import { winnerProfile } from "../../controllers/Admin/winnerProfile.js";
 
 const router = express.Router();
 const storage = multer.diskStorage({
@@ -30,19 +31,10 @@ const storage = multer.diskStorage({
       }
 })
 
-//const upload = multer()
 const upload = multer({storage: storage})
 
-/////////////// Test
-// router.post('/sendtext', sendEmail)
-// router.get('/testlive/:id', (req, res) => {
-//       res.json("hello")
-// })
-// router.post('/addpic', upload.array('image', 5), addPic)
-
 ////////////////////////////// Real
-router.post('/admin', VerifyAdmin)
-router.post('/user', VerifyUser)
+router.get('/checkauth', checkAuth)
 
 router.post('/register', signup)//
 router.post('/login', login)//
@@ -55,6 +47,8 @@ router.get('/admin/home', adminHome)//
 router.get('/admin/products/success', goodsSuccess)//
 router.post('/admin/home/addproduct', upload.array("images", 5), addProduct)//
 router.get('/admin/products/:goodsID', goodInfo)//
+router.put('/restock/:goodsID', restockProduct)
+router.get('/winner/profile/:username', winnerProfile)
 
 /* ----- User ----- */
 router.get('/user/home', userHome)//

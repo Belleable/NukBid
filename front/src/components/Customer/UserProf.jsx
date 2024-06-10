@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import Head from '../Head';
-import Pic from '../../images/pic.jpg';
+import Pic from '../../images/Defaultprofile.png';
 import Alert from '../Alert';
 import toast from 'react-hot-toast';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import './css/UserProf.css'
 
 function UserProf() {
     const [profile, setProfile] = useState([]);
@@ -35,10 +38,12 @@ function UserProf() {
 
     return (
         <>
-            <div className="profile-container" key={profile.id}>
-                <Head title={profile.username} />
+            <div className="profile-container" key={profile._id}>
+                <Head title="หมาโร่"/>
                 <Alert />
-                <Link to='/user/home' className='back-btn'>ย้อนกลับ</Link>
+                <Link to={-1} className='back-btn-bg'>
+                    <FontAwesomeIcon className='back-btn' icon={faArrowLeft} />
+                </Link>
                 <h1>โปรไฟล์</h1>
                 { profile.picture ? 
                     (<img src={`http://localhost:3380/${profile.picture.data}`} />)
@@ -49,12 +54,12 @@ function UserProf() {
                 <h3>{profile.fname} {profile.lname}</h3>
                 <div className='user-contact'>
                     <div className='tel-email'>
-                        <label>อีเมล
+                        <div className='email'>อีเมล
                             <p>{profile.email}</p>
-                        </label>
-                        <label>เบอร์โทรศัพท์
+                        </div>
+                        <div className='phone'>เบอร์โทรศัพท์
                             <p>{profile.tel}</p>
-                        </label>
+                        </div>
                     </div>
                     <div className='address'>
                         <label>ที่อยู่สำหรับจัดส่ง
@@ -63,7 +68,7 @@ function UserProf() {
                     </div>
                 </div>
                 <div className='button'>
-                    <Link to='/login' className="logout-btn" role="button" onClick={handleLogout}>ออกจากระบบ</Link>
+                    <Link className="logout-btn" role="button" onClick={handleLogout}>ออกจากระบบ</Link>
                     <Link to='/user/profile/edit' className="edit-btn" role="button">แก้ไขโปรไฟล์</Link>
                 </div>    
             </div>

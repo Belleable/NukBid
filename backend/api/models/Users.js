@@ -20,8 +20,7 @@ const userSchema = new mongoose.Schema({
       },
       email: {
             type: String,
-            require: true,
-            unique: true
+            require: true
       },
       tel: {
             type: String,

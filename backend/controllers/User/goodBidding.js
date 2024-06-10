@@ -55,15 +55,17 @@ export const goodBidding = async (req, res) => {
                 await Bidding.insertMany({ userID: objectId, goodsID: goodsId })
         }
         //Check ว่าประมูลเข้ามาตอน 5 นาทีสุดท้ายมั้ย แล้วเพิ่มเวลาอีก10นาที
-        if (timeDifferenceInMinutes <= 5 && timeDifferenceInMinutes >= 0) {
+        if (timeDifferenceInMinutes <= 5 && timeDifferenceInMinutes > 0) {
             const newEndTime = new Date(datetimeOld);
             newEndTime.setMinutes(newEndTime.getMinutes() + 10);
             console.log(`New end time: ${newEndTime}`);
             await Goods.findOneAndUpdate({ _id: goodsId }, { topBuyer: objectId, maxPrice: price, endTime: newEndTime })
+        } else if (timeDifferenceInMinutes <= 0){
+            return res.json({success: false, text: 'หมดเวลาในการประมูลแล้ว'})
         } else {
             await Goods.findOneAndUpdate({ _id: goodsId }, { topBuyer: objectId, maxPrice: price })
         }
-        sendEmail(`http://localhost:5173/detail/${goodsID}`, allUser_bidding.map(user => user.email))
+        sendEmail(`http://localhost:5173/user/detail/${goodsID}`, allUser_bidding.map(user => user.email))
         res.json({success: true, text: "เสนอราคาแล้วเรียบร้อย"})
     } catch (error) {
         console.log(error)

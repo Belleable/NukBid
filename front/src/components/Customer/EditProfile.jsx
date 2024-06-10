@@ -1,10 +1,13 @@
 import React, { useRef, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from "react-router-dom";
-import Pic from '../../images/pic.jpg';
+import Pic from '../../images/Defaultprofile.png';
 import Head from '../Head';
 import Alert from '../Alert';
 import toast from 'react-hot-toast';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import './css/EditProfile.css'
 
 function Edit() {
     const inputRef = useRef(null);
@@ -125,9 +128,12 @@ function Edit() {
     return (
         <>
             <Head title="แก้ไขโปรไฟล์" />
-            <Link to='/user/profile' className='back-btn'>ย้อนกลับ</Link>
+            <Link to={-1} className='back-btn-bg'>
+                <FontAwesomeIcon className='back-btn' icon={faArrowLeft} />
+            </Link>
 
-            <main>
+            <main className='EditProfile'>
+                <h1>แก้ไขโปรไฟล์</h1>
                 <form action="" onSubmit={handleSubmit}>
                     <div className='file-input' onClick={handleImgClick}>
                         {user.picture  ? 
@@ -138,40 +144,49 @@ function Edit() {
                             :
                             <img src={Pic} alt=''/>
                         }
-                        
                         <input type='file' onChange={handleChange} ref={inputRef} name='picture' />
                     </div>
 
                     <div className="text-input">
-                        <div className='left-input'>
-                            <label htmlFor="fname">ชื่อจริง
-                                <input id="fname" type="text" value={user.fname} onChange={handleChange} name="fname" />
-                            </label>
-                            <label htmlFor="email">อีเมล
-                                <input id="email" type="text" value={user.email} onChange={handleChange} name="email" />
-                            </label>
-                            <label htmlFor="tel">เบอร์โทรศัพท์
-                                <input id="tel" type="text" value={user.tel} onChange={handleChange} name="tel" />
-                            </label>
-                            <label htmlFor="password">รหัสผ่านใหม่
-                                <input id="password" type="password" value={user.password} onChange={handleChange} name="password" />
+                        <div className='fname'>
+                            <label for="fname-box">ชื่อจริง
+                            <input id="fname" type="text" value={user.fname} onChange={handleChange} name="fname" />
                             </label>
                         </div>
-                        <div className='right-input'>
-                            <label htmlFor="lname">นามสกุล
-                                <input id="lname" type="text" value={user.lname} onChange={handleChange} name="lname" />
+                        <div className='lname-box'>
+                            <label for="lname">นามสกุล
+                            <input id="lname" type="text" value={user.lname} onChange={handleChange} name="lname" />
                             </label>
-                            <label htmlFor="address">ที่อยู่สำหรับจัดส่ง
-                                <textarea rows={4} cols={40} id="address" type="text" value={user.address} onChange={handleChange} name="address" />
+                        </div>
+                        <div className='email-box'>
+                            <label for="email">อีเมล
+                            <input id="email" type="text" value={user.email} onChange={handleChange} name="email" />
                             </label>
-                            <label htmlFor="conf_pw">ยืนยันรหัสผ่าน
-                                <input id="conf_pw" type="password" value={user.conf_pw} onChange={handleChange} name="conf_pw" />
+                        </div>
+                        <div className='tel-box'>
+                            <label for="tel">เบอร์โทรศัพท์
+                            <input id="tel" type="text" value={user.tel} onChange={handleChange} name="tel" />
                             </label>
-                        </div>        
+                        </div>
+                        <div className='address-box'>
+                            <label for="address">ที่อยู่สำหรับจัดส่ง
+                            <textarea rows={4} cols={40} id="address" type="text" value={user.address} onChange={handleChange} name="address" />
+                            </label>
+                        </div>
+                        <div className='pw-box'>
+                            <label for="password">รหัสผ่านใหม่
+                            <input id="password" type="password" value={user.password} onChange={handleChange} name="password" />
+                            </label>
+                        </div>
+                        <div className='conf-box'>
+                            <label for="conf_pw">ยืนยันรหัสผ่าน
+                            <input id="conf_pw" type="password" value={user.conf_pw} onChange={handleChange} name="conf_pw" />
+                            </label>
+                        </div>      
                     </div>
 
                     <div class="CancelAndSubmit">
-                        <button className='cancel-btn' onClick={handleClick}>ยกเลิก</button>
+                        <button className='cancel-btn' type='reset' onClick={handleClick}>ยกเลิก</button>
                         <button className='submit-btn' type="submit" name="submit">ยืนยัน</button>
                     </div>
                 </form>

@@ -1,0 +1,116 @@
+.Login {
+    background: linear-gradient(to bottom, #D3ECCD 0%, #C8B7DC 100%);
+    background-size: cover;
+    height: 100vh;
+}
+
+.Login .container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border-radius: 30px;
+    background-color: #fff;
+    height: 400px;
+    position: absolute;
+    top: 50%;
+    margin-top: -200px;
+    box-shadow: 2px 2px 10px #7b7b7b;
+}
+
+.Login img {
+    height: 400px;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    object-fit: cover;
+}
+
+.Login .container form {
+    width: 380px;
+}
+
+.Login h1 {
+    margin-top: 65px;
+    font-family: "Fredoka", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+    font-size: 45px;
+    color: #495C9D;
+    margin-bottom: 25px;
+}
+
+.Login .container label>input {
+    border-radius: 20px;
+    border: 2px solid #C8B7DC;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    width: 230px;
+    font-size: 14px;
+    margin-top: 2px;
+}
+
+.Login .container label>input:focus {
+    border: 2px solid #b1d2a8;
+    outline: none
+}
+
+.Login .container label {
+    display: flex;
+    flex-direction: column;
+    font-family: "Fredoka", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+    margin-bottom: 10px;
+}
+
+.Login .container .login-btn {
+    font-family: "Fredoka", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+    font-size: 15px;
+    margin-top: 15px;
+    padding: 3px;
+    padding-bottom: 5px;
+    display: inline;
+    width: 100px;
+    margin-bottom: 15px;
+    background-color: #C8B7DC;
+    border: 0px;
+    text-align: center;
+    color: #fff;
+    border-radius: 20px;
+}
+
+.Login .container .login-btn:active {
+    background-color: #D3ECCD;
+}
+
+.Login .container .login-btn:focus {
+    border: 0px;
+}
+
+.Login form>span, .Login form>span>a {
+    font-family: "Fredoka", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+}
+
+.Login form>span>a {
+    color: #296dff;
+    text-decoration: none;
+}
+
+@media screen and (max-width: 600px) {
+    .Login img {
+        display: none;
+    }
+}

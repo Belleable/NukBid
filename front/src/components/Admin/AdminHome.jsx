@@ -4,6 +4,8 @@ import Card from '../Card';
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import Head from '../Head';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 function AdminHome() {
     const [auth, setAuth] = useState(false);
@@ -30,11 +32,16 @@ function AdminHome() {
     console.log(goods)
     return (
         <>
-        <Head title="หน้าหลัก"/>
-        <AdminNav />
-        <h4 className='bid-text'>สินค้าที่กำลังเปิดประมูล</h4>
-        <Link to='/admin/home' style={{ textDecoration: 'none' }}>เพิ่มสินค้า</Link>
-        <Card goods={goods}/>
+            <Head title="หน้าหลัก"/>
+            <AdminNav />
+            <>.</>
+            <h4 className='bid-text'>สินค้าที่กำลังเปิดประมูล</h4>
+            <Link to='/admin/home/addproduct' className='add-btn-bg'>
+                <FontAwesomeIcon className='add-btn' icon={faPlus} />
+            </Link>
+            <div className='card-container'>
+                <Card goods={goods} role={'admin'}/>
+            </div>
         </>
     );
 }

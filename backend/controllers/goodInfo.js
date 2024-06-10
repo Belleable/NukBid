@@ -6,7 +6,7 @@ export const goodInfo = async (req, res) => {
     const { goodsID } = req.params;
     const objectId = new mongoose.Types.ObjectId(goodsID);
 
-    console.log(goodsID); // Logging goodsID for debugging
+    // console.log(goodsID); // Logging goodsID for debugging
 
     try {
         const good_info = await Goods.aggregate([
@@ -75,7 +75,7 @@ export const goodInfo = async (req, res) => {
         ]);
         
         const formattedPictures = pictures.map(item => item.picLink);
-        console.log(good_info)
+        // console.log(pictures)
         res.json({success: true, data: good_info, picture: formattedPictures})
         
     } catch (error) {

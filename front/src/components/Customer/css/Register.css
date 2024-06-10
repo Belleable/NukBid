@@ -1,0 +1,138 @@
+.Register {
+    background: linear-gradient(to bottom, #D3ECCD 0%, #C8B7DC 100%);
+    background-size: cover;
+    height: 100vh;
+    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr, 30fr, 1fr;
+}
+
+.Register main {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    background-color: #fff;
+    height: 540px;
+    position: absolute;
+    top: 50%;
+    margin-top: -270px;
+    box-shadow: 2px 2px 10px #7b7b7b;
+    width: 800px;
+}
+
+.Register main .user-details {
+    display: grid;
+    grid-template-rows: repeat(4, 25%);
+    grid-template-columns: repeat(2, 50%);
+    gap: 5px;
+}
+
+.Register main label {
+    display: flex;
+    flex-direction: column;
+    font-family: "Fredoka", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+    margin: 5px 80px;
+}
+
+.Register main label input {
+    font-family: "IBM Plex Sans Thai Looped", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    border-radius: 20px;
+    border: 2px solid #C8B7DC;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    width: 230px;
+    font-size: 14px;
+    margin-top: 2px;
+}
+
+.Register main label input:focus {
+    border: 2px solid #b1d2a8;
+    outline: none
+}
+
+.Register h3 {
+    font-family: "Fredoka", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+    font-size: 45px;
+    color: #495C9D;
+    margin-bottom: 13px;
+    margin-top: -45px;
+    align-self: start;
+    margin-left: 10%;
+}
+
+.Register img {
+    width: 800px;
+    opacity: 0.9;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    bottom: 0;
+    top: auto;
+    position: absolute;
+}
+
+.Register form>input {
+    font-family: "Fredoka", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+    font-size: 15px;
+    margin-top: 25px;
+    padding: 3px;
+    padding-bottom: 5px;
+    display: inline;
+    width: 100px;
+    margin-bottom: 15px;
+    background-color: #C8B7DC;
+    border: 0px;
+    text-align: center;
+    color: #fff;
+    border-radius: 20px;
+    margin-left: 77.5%;
+}
+
+.Register form>input:active {
+    background-color: #D3ECCD;
+}
+
+@media screen and (max-width: 600px) {
+    .Register {
+        height: 150vh;
+    }
+    .Register main .user-details {
+        grid-template-rows: repeat(8, 12.5%);
+        grid-template-columns: repeat(1, 100%);
+    }
+    .Register main {
+        height: 130vh;
+        width: 80%;
+        top: 70%;
+        margin-top: -65vh;
+    }
+    .Register img {
+        width: 100%;
+    }
+    .Register form>input {
+        margin-left: 60%;
+        margin-top: 50px;
+    }
+    .Register form>input[type='submit']{
+        margin-bottom: 50px;
+    }
+}
